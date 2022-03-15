@@ -1,14 +1,16 @@
 import React from 'react';
 import Head from 'next/head';
+import Header from '../components/Header.tsx';
 
 const Home: React.FC = () => (
-  <div className="bg[#000]">
+  <div>
     <Head>
       <title>NextPedia</title>
     </Head>
-    <main>
-      <h1>Hello World</h1>
-    </main>
+
+    <Header />
+
+    <main></main>
   </div>
 );
 

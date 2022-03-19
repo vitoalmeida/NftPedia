@@ -3,20 +3,34 @@ import { useRouter } from 'next/router';
 import { Formik } from 'formik';
 import Head from 'next/head';
 import Image from 'next/image';
-import Header from '../components/Header.tsx';
-import Input from '../components/Input.tsx';
+import Header from '../components/Header';
+import Input from '../components/Input';
+
+interface InitialValues {
+  goingTo: string;
+  travelers: number;
+  checkIn: string;
+  checkOut: string;
+}
+
+interface InitialValuesError {
+  goingTo?: string;
+  travelers?: string;
+  checkIn?: string;
+  checkOut?: string;
+}
 
 const Home: React.FC = () => {
   const router = useRouter();
 
-  const initialValues = {
+  const initialValues: InitialValues = {
     goingTo: 'Londres',
     travelers: 1,
     checkIn: '12',
     checkOut: '25',
   };
 
-  function handleSearch(values) {
+  function handleSearch(values: InitialValues) {
     router.push({
       pathname: '/searchHotel',
       query: {
@@ -36,21 +50,17 @@ const Home: React.FC = () => {
 
       <Header />
 
-      <main className="flex flex-col z-0 overflow-hidden">
-        <div className="flex w-full h-[540px] flex-row mt-16 ">
+      <main id="main" className="flex flex-col z-0 overflow-hidden">
+        <div id="home" className="flex w-full h-[540px] flex-row mt-16 ">
           <div className="flex flex-col ml-auto px-6 mt-36">
-            <text className="text-black font-extrabold text-4xl">Nos te</text>
-            <text className="text-black font-extrabold text-4xl">
-              ajudamos a
-            </text>
-            <text className="text-dark-green font-extrabold text-4xl">
+            <p className="text-black font-extrabold text-4xl">Nos te</p>
+            <p className="text-black font-extrabold text-4xl">ajudamos a</p>
+            <p className="text-dark-green font-extrabold text-4xl">
               encontrar um
               <br /> hotel
-            </text>
-            <text className="text-black font-extrabold text-4xl">
-              que seja sua
-            </text>
-            <text className="text-black font-extrabold text-4xl">cara</text>
+            </p>
+            <p className="text-black font-extrabold text-4xl">que seja sua</p>
+            <p className="text-black font-extrabold text-4xl">cara</p>
           </div>
           <div className="flex w-1/2">
             {/* <Image
@@ -62,15 +72,21 @@ const Home: React.FC = () => {
           /> */}
           </div>
         </div>
-        <div className="flex w-full">
+        <div id="first-wave" className="flex w-full">
           <Image src="/first-wave.png" width="2880" height="730" />
         </div>
-        <div className="flex w-full h-[700px] px-10 bg-light-grey justify-center">
-          <div className="flex flex-col w-full px-6 py-6 bg-white rounded-2xl">
+        <div
+          id="search-hotel"
+          className="w-full h-[800px] px-10 bg-light-grey justify-center"
+        >
+          <h1 className="font-bold text-3xl text-black mb-[0.8rem] mt-8">
+            Search Hotels
+          </h1>
+          <div className="flex-col w-full px-8 py-8 bg-white rounded-[2rem] ">
             <Formik
               initialValues={initialValues}
               validate={values => {
-                const errors = {};
+                const errors: InitialValuesError = {};
                 if (!values.goingTo) {
                   errors.goingTo = 'Required';
                 }
@@ -149,20 +165,26 @@ const Home: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full h-14 rounded-2xl bg-dark-green"
+                    className="w-full h-14 rounded-2xl bg-dark-green text-xl text-white font-bold border-[#00b587] border-b-[0.4rem]"
                   >
-                    Submit
+                    SUBMIT
                   </button>
                 </form>
               )}
             </Formik>
           </div>
         </div>
-        <div className="flex w-full mt-[-300px]">
+        <div id="second-wave" className="flex w-full mt-[-300px]">
           <Image src="/second-wave.png" width="2875" height="387" />
         </div>
-        <div className="flex w-full h-96 bg-greyish">
-          <h1>Working</h1>
+        <div
+          id="footer"
+          className="flex w-full px-10 h-20 bg-greyish flex-row pt-6"
+        >
+          <p className="font-medium text-black">
+            Worked by&nbsp;
+            <span className="text-dark-green">Vitor Machado</span>
+          </p>
         </div>
       </main>
     </div>
@@ -170,7 +192,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-
-export const getStaticProps = () => ({
-  props: {},
-});

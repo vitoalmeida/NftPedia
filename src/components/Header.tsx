@@ -32,6 +32,10 @@ const Header: React.FC = () => {
     checkOut: '',
   };
 
+  function handleSearch(values) {
+    console.log('buscando');
+  }
+
   return (
     <>
       <div className="flex fixed z-20 w-full drop-shadow-2xl bg-white h-20 md:h-16 items-center justify-center md:justify-between md:px-24 xl:px-44 2xl:px-60 duration-500">
@@ -53,7 +57,10 @@ const Header: React.FC = () => {
         id="filter-modal"
         className={filterIsOpen ? 'filter-menu-opened' : 'filter-menu'}
       >
-        <div id="filter-conteinter" className="flex flex-col w-full px-14 py-10">
+        <div
+          id="filter-conteinter"
+          className="flex flex-col w-full px-14 py-10"
+        >
           <Formik
             initialValues={initialValues}
             validate={values => {

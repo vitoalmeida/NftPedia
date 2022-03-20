@@ -3,6 +3,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .filter-menu {
+    @apply z-10 top-[-100%] duration-500 absolute flex h-full w-full bg-white;
+  }
+  .filter-menu-opened {
+    @apply z-10 shadow-xl top-0 pt-20 md:pt-16 duration-500 fixed flex h-full md:h-1/2 xl:h-[25rem] md:rounded-[2rem] ease-in-out w-full bg-white;
+  }
+}
+
 body {
   font-family: 'Inter', sans-serif;
 }

@@ -24,7 +24,7 @@ const Home: React.FC = () => {
   const router = useRouter();
 
   const initialValues: InitialValues = {
-    goingTo: 'Londres',
+    goingTo: 'Ac',
     travelers: 1,
     checkIn: '12',
     checkOut: '25',

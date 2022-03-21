@@ -1,20 +1,11 @@
-import { Hotel } from '../@types/general';
+import { Hotel, Filter } from '../@types/general';
 
-function filterHotels(
-  filter: {
-    goingTo: string;
-    travelers: string;
-    checkIn: string;
-    checkOut: string;
-    stars: number;
-  },
-  hotelsList: Hotel[]
-): Hotel[] {
-  let filteredHotel;
+function filterHotels(filter: Filter, hotelsList: Hotel[]): Hotel[] {
+  let filteredHotel = hotelsList;
 
   if (filter.goingTo) {
-    filteredHotel = hotelsList.filter(value => {
-      if (value.city.toLowerCase().includes(filter.goingTo.toLowerCase())) {
+    filteredHotel = filteredHotel.filter(value => {
+      if (value.city.toLowerCase().includes(filter.goingTo?.toLowerCase())) {
         return value;
       }
     });
@@ -28,9 +19,20 @@ function filterHotels(
   //   });
   // }
 
+  if (filter.price) {
+    filteredHotel = filteredHotel.filter(value => {
+      if (
+        value.price < Number(filter.price[1]) &&
+        value.price > Number(filter.price[0])
+      ) {
+        return value;
+      }
+    });
+  }
+
   if (filter.stars) {
-    filteredHotel = hotelsList.filter(value => {
-      if (value.stars === filter.stars) {
+    filteredHotel = filteredHotel.filter(value => {
+      if (value.stars === Number(filter.stars)) {
         return value;
       }
     });

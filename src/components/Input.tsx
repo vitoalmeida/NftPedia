@@ -8,7 +8,7 @@ interface Props {
   type?: string;
   onChange: any;
   value: any;
-  onBlur: any;
+  onBlur?: any;
 }
 
 const Input: React.FC<Props> = ({
@@ -30,18 +30,19 @@ const Input: React.FC<Props> = ({
   }
 
   return (
-    <div className="flex flex-row items-center mb-3 pr-2 py-2 rounded-xl border border-solid border-[#DEDEDE]">
-      <div id="icon" className="px-2">
+    <div className="input-conteiner">
+      <div id="icon" className="absolute px-3 py-2">
         {renderIcon}
       </div>
+      <span className="absolute my-[0.7rem] ml-[2.7rem] h-5 w-[0.12rem] rounded-full bg-[#EAEAEA]" />
       <input
-        className="border-l-2 border-[#eaeaea] pl-[0.7rem] w-full"
+        className="input"
         type={type}
         name={name}
         placeholder={placeholder}
         onChange={onChange}
         value={value}
-        onBlur={onBlur}
+        onBlur={onBlur || undefined}
       />
     </div>
   );

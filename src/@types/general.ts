@@ -11,3 +11,12 @@ export interface Hotel {
   rating: number;
   description: string;
 }
+
+export interface Filter {
+  goingTo?: string | string[];
+  travelers?: string | string[];
+  price?: string | string[];
+  stars?: string | string[];
+  checkIn?: string | string[];
+  checkOut?: string | string[];
+}

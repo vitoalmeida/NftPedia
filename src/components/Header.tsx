@@ -1,143 +1,87 @@
 // Libraries
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { FaTimes, FaSearch } from 'react-icons/fa';
-import { Formik } from 'formik';
-
+import Link from 'next/link';
+import { FaTimes, FaSearch, FaSlidersH } from 'react-icons/fa';
 // Components
-import Input from './Input';
-
-interface InitialValues {
-  goingTo?: string;
-  travelers?: number;
-  checkIn?: string;
-  checkOut?: string;
-}
-
-interface InitialValuesError {
-  goingTo?: string;
-  travelers?: string;
-  checkIn?: string;
-  checkOut?: string;
-}
+import SmallFilters from './SmallFilters';
+import LargeFilters from './LargeFilters';
+import { useRouter } from 'next/router';
 
 const Header: React.FC = () => {
+  // Route params
+  const router = useRouter();
+  const { goingTo, travelers, checkIn, checkOut, stars, price } = router.query;
+
   // Filter states
   const [filterIsOpen, setFilterOpen] = useState(false);
 
-  const initialValues: InitialValues = {
-    goingTo: '',
-    travelers: undefined,
-    checkIn: '',
-    checkOut: '',
+  // Window width state
+  const [isMobile, setMobile] = useState<boolean>();
+
+  // Function to get screen type
+  const updateMedia = () => {
+    setMobile(window.innerWidth < 770);
   };
 
-  function handleSearch(values) {
-    console.log('buscando');
-  }
+  useEffect(() => {
+    setMobile(window.innerWidth < 770);
+    window.addEventListener('resize', updateMedia);
+    return () => window.removeEventListener('resize', updateMedia);
+  });
 
   return (
     <>
       <div className="flex fixed z-20 w-full drop-shadow-2xl bg-white h-20 md:h-16 items-center justify-center md:justify-between md:px-24 xl:px-44 2xl:px-60 duration-500">
-        <div className="w-44 md:w-36">
+        <a href="/" className="w-44 md:w-36">
           <Image src="/logo.png" alt="logo" width="270" height="44" />
-        </div>
-        <span
-          className="absolute right-10 md:relative md:right-0"
-          onClick={() => setFilterOpen(!filterIsOpen)}
-        >
-          {filterIsOpen ? (
-            <FaTimes size={'2rem'} color="#04D7A4" />
+        </a>
+        <span className="absolute right-10 md:relative md:right-0">
+          {router.pathname === '/' ? (
+            <Link href="#first-wave">
+              <FaSearch size={'2rem'} color="#04D7A4" />
+            </Link>
           ) : (
-            <FaSearch size={'2rem'} color="#04D7A4" />
+            <div onClick={() => setFilterOpen(!filterIsOpen)}>
+              {filterIsOpen ? (
+                <FaTimes size={'2rem'} color="#04D7A4" />
+              ) : (
+                <FaSlidersH size={'2rem'} color="#04D7A4" />
+              )}
+            </div>
           )}
         </span>
       </div>
+
       <div
         id="filter-modal"
         className={filterIsOpen ? 'filter-menu-opened' : 'filter-menu'}
       >
-        <div
-          id="filter-conteinter"
-          className="flex flex-col w-full px-14 py-10"
-        >
-          <Formik
-            initialValues={initialValues}
-            validate={values => {
-              const errors: InitialValuesError = {};
-              if (!values.goingTo) {
-                errors.goingTo = 'Required';
-              }
-              if (!values.travelers) {
-                errors.travelers = 'Required';
-              }
-              if (!values.checkIn) {
-                errors.checkIn = 'Required';
-              }
-              if (!values.checkOut) {
-                errors.checkOut = 'Required';
-              }
-
-              return errors;
+        {isMobile ? (
+          <SmallFilters
+            filterValues={{
+              goingTo,
+              travelers,
+              checkIn,
+              checkOut,
+              stars,
+              price,
             }}
-            onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                handleSearch(values);
-                setSubmitting(false);
-              }, 400);
+            closeFilter={setFilterOpen}
+          />
+        ) : (
+          <LargeFilters
+            filterValues={{
+              goingTo,
+              travelers,
+              checkIn,
+              checkOut,
+              stars,
+              price,
             }}
-          >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting,
-              /* and other goodies */
-            }) => (
-              <form onSubmit={handleSubmit}>
-                <h1 className="text-[2.5rem] text-black font-bold">Filtros</h1>
-                <p className="text-[1.4rem] font-bold text-dark-grey">
-                  Indo para
-                </p>
-                <Input
-                  onChange={handleChange}
-                  value={values.goingTo}
-                  onBlur={handleBlur}
-                  type="text"
-                  name="goingTo"
-                  placeholder="Ex: Salvador"
-                />
-                <p className="text-[1.4rem] font-bold text-dark-grey">
-                  Viajantes
-                </p>
-                <Input
-                  onChange={handleChange}
-                  value={values.travelers}
-                  onBlur={handleBlur}
-                  type="text"
-                  name="travelers"
-                  placeholder="Ex: 1"
-                />
-                <p className="text-[1.4rem] font-bold text-dark-grey">
-                  Check in
-                </p>
-                <p className="text-[1.4rem] font-bold text-dark-grey">
-                  Chek out
-                </p>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full h-14 rounded-2xl bg-dark-green text-xl text-white font-bold border-[#00b587] border-b-[0.4rem]"
-                >
-                  SUBMIT
-                </button>
-              </form>
-            )}
-          </Formik>
-        </div>
+            closeFilter={setFilterOpen}
+          />
+        )}
       </div>
     </>
   );

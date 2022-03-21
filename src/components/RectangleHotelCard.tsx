@@ -2,9 +2,9 @@
 import React from 'react';
 import Image from 'next/image';
 import { IoStar, IoLocationSharp } from 'react-icons/io5';
-
 // Types
 import { Hotel } from '../@types/general';
+
 interface Props {
   hotel: Hotel;
 }

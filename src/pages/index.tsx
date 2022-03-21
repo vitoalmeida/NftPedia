@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Formik } from 'formik';
+
+import { ptBR } from 'date-fns/locale';
+import { DateRangePicker } from 'react-nice-dates';
+import 'react-nice-dates/build/style.css';
+
 import Head from 'next/head';
 import Image from 'next/image';
 import Header from '../components/Header';
 import Input from '../components/Input';
+import Footer from '../components/Footer';
 
 interface InitialValues {
   goingTo: string;
@@ -26,9 +32,13 @@ const Home: React.FC = () => {
   const initialValues: InitialValues = {
     goingTo: 'Ac',
     travelers: 1,
-    checkIn: '12',
-    checkOut: '25',
+    checkIn: '',
+    checkOut: '',
   };
+
+  // Date-picker states
+  const [startDate, setStartDate] = useState<Date | null>();
+  const [endDate, setEndDate] = useState<Date | null>();
 
   function handleSearch(values: InitialValues) {
     router.push({
@@ -36,8 +46,8 @@ const Home: React.FC = () => {
       query: {
         goingTo: values.goingTo,
         travelers: values.travelers,
-        checkIn: values.checkIn,
-        checkOut: values.checkOut,
+        checkIn: startDate ? startDate.toISOString() : undefined,
+        checkOut: endDate ? endDate.toISOString() : undefined,
       },
     });
   }
@@ -87,18 +97,18 @@ const Home: React.FC = () => {
               initialValues={initialValues}
               validate={values => {
                 const errors: InitialValuesError = {};
-                if (!values.goingTo) {
-                  errors.goingTo = 'Required';
-                }
-                if (!values.travelers) {
-                  errors.travelers = 'Required';
-                }
-                if (!values.checkIn) {
-                  errors.checkIn = 'Required';
-                }
-                if (!values.checkOut) {
-                  errors.checkOut = 'Required';
-                }
+                // if (!values.goingTo) {
+                //   errors.goingTo = 'Required';
+                // }
+                // if (!values.travelers) {
+                //   errors.travelers = 'Required';
+                // }
+                // if (!values.checkIn) {
+                //   errors.checkIn = 'Required';
+                // }
+                // if (!values.checkOut) {
+                //   errors.checkOut = 'Required';
+                // }
 
                 return errors;
               }}
@@ -162,6 +172,46 @@ const Home: React.FC = () => {
                     value={values.checkOut}
                     onBlur={handleBlur}
                   />
+
+                  <DateRangePicker
+                    startDate={startDate || undefined}
+                    endDate={endDate || undefined}
+                    onStartDateChange={setStartDate}
+                    onEndDateChange={setEndDate}
+                    minimumLength={1}
+                    minimumDate={new Date()}
+                    format="dd MMM yyyy"
+                    locale={ptBR}
+                  >
+                    {({ startDateInputProps, endDateInputProps, focus }) => (
+                      <div className="flex flex-row date-range justify-between">
+                        <div className="flex flex-col">
+                          <p className="filter-text">Check in</p>
+                          <input
+                            className={
+                              'border-[#DEDEDE] border-[0.1rem] rounded-xl px-3 py-2 w-40 lg:w-52 duration-500' +
+                              (focus === 'startDate' ? ' -focused' : '')
+                            }
+                            {...startDateInputProps}
+                            placeholder="Início"
+                          />
+                        </div>
+
+                        <div className="flex flex-col">
+                          <p className="filter-text">Check</p>
+                          <input
+                            className={
+                              'border-[#DEDEDE] border-[0.1rem] rounded-xl px-3 py-2 w-40 lg:w-52 duration-500' +
+                              (focus === 'endDate' ? ' -focused' : '')
+                            }
+                            {...endDateInputProps}
+                            placeholder="Fim"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </DateRangePicker>
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -174,17 +224,8 @@ const Home: React.FC = () => {
             </Formik>
           </div>
         </div>
-        <div id="second-wave" className="flex w-full mt-[-300px]">
-          <Image src="/second-wave.png" width="2875" height="387" />
-        </div>
-        <div
-          id="footer"
-          className="flex w-full px-10 h-20 bg-greyish flex-row pt-6"
-        >
-          <p className="font-medium text-black">
-            Worked by&nbsp;
-            <span className="text-dark-green">Vitor Machado</span>
-          </p>
+        <div className="bg-light-grey">
+          <Footer />
         </div>
       </main>
     </div>

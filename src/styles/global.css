@@ -8,7 +8,25 @@
     @apply z-10 top-[-100%] duration-500 absolute flex h-full w-full bg-white;
   }
   .filter-menu-opened {
-    @apply z-10 shadow-xl top-0 pt-20 md:pt-16 duration-500 fixed flex h-full md:h-1/2 xl:h-[25rem] md:rounded-[2rem] ease-in-out w-full bg-white;
+    @apply overflow-hidden z-10 shadow-xl top-0 pt-20 md:pt-16 duration-500 fixed flex h-full md:h-[29rem] md:rounded-[2rem] ease-in-out w-full bg-white;
+  }
+  .filter-text {
+    @apply text-[1.4rem] font-bold text-grey;
+  }
+  .input-conteiner {
+    @apply flex flex-row w-full;
+  }
+  .input {
+    @apply mb-3 pl-14 w-full focus:outline-none px-2 py-2 rounded-xl border border-solid border-[#DEDEDE] focus:border-dark-green;
+  }
+  .filter-y-line {
+    @apply flex mx-10 xl:mx-24 mt-auto w-1 h-32 mb-6 bg-gray-100 rounded-full duration-500;
+  }
+  .modal {
+    @apply bg-white rounded-3xl w-auto h-auto my-auto;
+  }
+  .modal-overlay {
+    @apply fixed flex bg-black/40 top-20 md:top-16 bottom-0 right-0 left-0 justify-center items-center;
   }
 }
 

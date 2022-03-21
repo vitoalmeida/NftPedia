@@ -23,13 +23,14 @@
     @apply flex mx-10 xl:mx-24 mt-auto w-1 h-32 mb-6 bg-gray-100 rounded-full duration-500;
   }
   .modal {
-    @apply bg-white rounded-3xl w-auto h-auto my-auto;
+    @apply flex bg-white rounded-3xl w-auto h-auto my-auto flex-col;
   }
   .modal-overlay {
-    @apply fixed flex bg-black/40 top-20 md:top-16 bottom-0 right-0 left-0 justify-center items-center;
+    @apply fixed flex bg-black/50 top-20 md:top-16 bottom-0 right-0 left-0 justify-center items-center;
   }
 }
 
 body {
   font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
 }

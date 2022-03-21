@@ -60,26 +60,34 @@ const Home: React.FC = () => {
 
       <Header />
 
-      <main id="main" className="flex flex-col z-0 overflow-hidden">
-        <div id="home" className="flex w-full h-[540px] flex-row mt-16 ">
-          <div className="flex flex-col ml-auto px-6 mt-36">
-            <p className="text-black font-extrabold text-4xl">Nos te</p>
-            <p className="text-black font-extrabold text-4xl">ajudamos a</p>
-            <p className="text-dark-green font-extrabold text-4xl">
+      <main id="main" className="flex flex-col z-0">
+        <div
+          id="home"
+          className="flex w-full h-[540px] duration-500 flex-row mt-[-1rem] md:mt-2"
+        >
+          <div className="flex duration-500 flex-col ml-8 md:ml-24 lg:ml-36 xl:ml-48 px-6 mt-36">
+            <p className="text-black font-extrabold text-3xl md:text-5xl xl:text-6xl">
+              Nós te
+            </p>
+            <p className="text-black font-extrabold text-3xl md:text-5xl xl:text-6xl">
+              ajudamos a
+            </p>
+            <p className="text-dark-green font-extrabold text-3xl md:text-5xl xl:text-6xl">
               encontrar um
               <br /> hotel
             </p>
-            <p className="text-black font-extrabold text-4xl">que seja sua</p>
-            <p className="text-black font-extrabold text-4xl">cara</p>
+            <p className="text-black font-extrabold text-3xl md:text-5xl xl:text-6xl">
+              que seja a sua
+            </p>
+            <p className="text-black font-extrabold text-3xl md:text-5xl xl:text-6xl">
+              cara
+            </p>
           </div>
-          <div className="flex w-1/2">
-            {/* <Image
-            className="absolute"
-            src="/magnifier.png"
-            width="500"
-            height="500"
-            layout="fixed"
-          /> */}
+          <div className="absolute duration-500 right-[-12rem] top-[-0rem] w-[30rem] h-[30rem] md:right-[-15rem] md:top-[-5rem] md:w-[45rem] md:h-[45rem] lg:right-[-15rem] lg:top-[-15rem] lg:w-[60rem] lg:h-[60rem]">
+            <Image
+              src="/magnifier.png"
+              layout="fill"
+            />
           </div>
         </div>
         <div id="first-wave" className="flex w-full">

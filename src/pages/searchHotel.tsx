@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import ReactModal from 'react-modal';
-
 // API
 import { getHotels } from '../services/api';
 // Components
@@ -78,8 +76,15 @@ const SearchHotel: React.FC<HotelList> = ({ hotelList }) => {
       <main className="flex flex-col pt-20 md:pt-16 items-center h-full duration-500">
         <div className="mt-10 w-[20rem] md:w-[40rem] lg:w-[50rem] xl:w-[60rem] duration-500 mb-[-2rem]">
           <h1 className="font-extrabold text-[1.7rem] text-black">
-            Resultados para:{' '}
-            <span className="text-dark-green">'{goingTo}'</span>
+            Resultados para
+            {goingTo ? (
+              <>
+                <span className="text-dark-black">: {` `}</span>
+                <span className="text-dark-green">{goingTo}</span>
+              </>
+            ) : (
+              <span>{` `} sua busca</span>
+            )}
           </h1>
         </div>
         {(filteredHotels ? filteredHotels : hotelList).map((hotel, key) => {
@@ -97,13 +102,6 @@ const SearchHotel: React.FC<HotelList> = ({ hotelList }) => {
             );
           }
         })}
-        <ReactModal
-          className="modal"
-          overlayClassName="modal-overlay"
-          isOpen={false}
-        >
-          <p>text</p>
-        </ReactModal>
         <div></div>
       </main>
       {/* <div className="">

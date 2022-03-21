@@ -5,7 +5,11 @@ function filterHotels(filter: Filter, hotelsList: Hotel[]): Hotel[] {
 
   if (filter.goingTo) {
     filteredHotel = filteredHotel.filter(value => {
-      if (value.city.toLowerCase().includes(filter.goingTo?.toLowerCase())) {
+      if (
+        value.city
+          .toLowerCase()
+          .includes((filter.goingTo as string).toLowerCase())
+      ) {
         return value;
       }
     });
@@ -22,6 +26,7 @@ function filterHotels(filter: Filter, hotelsList: Hotel[]): Hotel[] {
   if (filter.price) {
     filteredHotel = filteredHotel.filter(value => {
       if (
+        filter.price &&
         value.price < Number(filter.price[1]) &&
         value.price > Number(filter.price[0])
       ) {

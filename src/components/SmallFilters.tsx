@@ -176,7 +176,7 @@ const SmallFilters: React.FC<Props> = ({ filterValues, closeFilter }) => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="flex-1 w-full h-14 rounded-2xl bg-dark-green text-xl text-white font-bold border-[#00b587] border-b-[0.4rem]"
+            className="flex-1 w-full mb-16 h-14 rounded-2xl bg-dark-green text-xl text-white font-bold border-[#00b587] border-b-[0.4rem]"
           >
             FILTRAR
           </button>

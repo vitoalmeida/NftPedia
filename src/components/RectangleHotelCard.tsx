@@ -41,8 +41,10 @@ const RectangleHotelCard: React.FC<Props> = ({ hotel }) => {
           </Carousel>
         </div>
 
-        <div className="my-5 mb-8 mx-12">
-          <h1 className="text-black font-bold text-[1.8rem]">{hotel.name}</h1>
+        <div className="my-5 mb-8 px-12">
+          <h1 className="text-black font-bold text-[1.8rem] w-[24rem] h-auto break-words">
+            {hotel.name}
+          </h1>
           <div className="flex mt-[0.2rem] items-center flex-row ml-[-0.2rem]">
             <IoLocationSharp size="2rem" color="#FF4A4A" />
             <p className="text-lg ml-2 font-bold text-dark-grey mr-8">

@@ -5,7 +5,7 @@ import { FaTimes, FaSearch } from 'react-icons/fa';
 
 const Footer: React.FC = () => {
   return (
-    <div className="mt-14">
+    <div>
       <div id="second-wave" className="flex w-full mb-[-0.032rem] duration-500">
         <Image src="/second-wave.png" width="2875" height="387" />
       </div>

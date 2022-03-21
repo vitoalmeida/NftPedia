@@ -5,10 +5,10 @@
 
 @layer components {
   .filter-menu {
-    @apply z-10 top-[-100%] duration-500 absolute flex h-full w-full bg-white;
+    @apply z-10 top-[-100%] ease-in-out duration-500 absolute flex h-full w-full bg-white;
   }
   .filter-menu-opened {
-    @apply overflow-hidden z-10 shadow-xl top-0 pt-20 md:pt-16 duration-500 fixed flex h-full md:h-[29rem] md:rounded-[2rem] ease-in-out w-full bg-white;
+    @apply overflow-y-scroll z-10 shadow-xl bottom-0 top-0 pt-20 md:pt-16 duration-500 fixed flex md:h-[29rem] md:rounded-[2rem] ease-in-out w-full bg-white;
   }
   .filter-text {
     @apply text-[1.4rem] font-bold text-grey;
@@ -27,6 +27,9 @@
   }
   .modal-overlay {
     @apply fixed flex bg-black/50 top-20 md:top-16 bottom-0 right-0 left-0 justify-center items-center;
+  }
+  .home-title {
+    @apply text-black leading-8 font-black md:font-extrabold text-[1.7rem] md:text-5xl xl:text-6xl;
   }
 }
 

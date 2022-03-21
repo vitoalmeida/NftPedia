@@ -36,7 +36,7 @@ const Header: React.FC = () => {
         <a href="/" className="w-44 md:w-36">
           <Image src="/logo.png" alt="logo" width="270" height="44" />
         </a>
-        <span className="absolute right-10 md:relative md:right-0">
+        <span className="absolute right-6 md:relative md:right-0">
           {router.pathname === '/' ? (
             <Link href="#first-wave">
               <FaSearch size={'2rem'} color="#04D7A4" />

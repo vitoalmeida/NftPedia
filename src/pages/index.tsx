@@ -22,16 +22,13 @@ const Home: React.FC = () => {
   // Router
   const router = useRouter();
 
+  // Initial form values 
   const initialValues: InitialValues = {
     goingTo: undefined,
     travelers: 1,
     checkIn: new Date(),
     checkOut: new Date(new Date().setDate(new Date().getDate() + 1)),
   };
-
-  // Date-picker states
-  const [startDate, setStartDate] = useState<Date | null>();
-  const [endDate, setEndDate] = useState<Date | null>();
 
   // Window width state
   const [isMobile, setMobile] = useState<boolean>();

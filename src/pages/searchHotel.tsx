@@ -27,7 +27,7 @@ const SearchHotel: React.FC<HotelList> = ({ hotelList }) => {
   // Reducer
   const [hotelState, dispatch] = useReducer(reducerHotel, initialState);
   const { loadingHotels } = hotelState;
-  console.log(loadingHotels);
+
   // Route params
   const router = useRouter();
   const { goingTo, travelers, checkIn, checkOut, stars, price } = router.query;

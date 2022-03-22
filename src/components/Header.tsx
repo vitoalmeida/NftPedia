@@ -43,7 +43,7 @@ const Header: React.FC = () => {
         </a>
         <span className="absolute right-6 md:relative md:right-0 cursor-pointer hover:scale-110 duration-300">
           {router.pathname === '/' ? (
-            <Link href="#first-wave">
+            <Link href="#second-wave">
               <FaSearch size={'2rem'} color="#04D7A4" />
             </Link>
           ) : (

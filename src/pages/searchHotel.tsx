@@ -81,9 +81,16 @@ const SearchHotel: React.FC<HotelList> = ({ hotelList }) => {
     <div className="relative h-full bg-gradient-to-b from-[#F4F4F4] to-white">
       <Head>
         <title>Search - Nextpedia</title>
+        <meta charSet="UTF-8" />
+        <meta name="description" content="Search results" />
+        <meta name="keywords" content="Hotels, Search, Booking" />
+        <meta name="author" content="Vitor Machado" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
+      
       <Header />
-      <main className="flex flex-col pt-20 md:pt-16 items-center h-full duration-500">
+
+      <main className="flex flex-col pt-20 md:pt-16 pb-20 items-center h-full duration-500">
         {loadingHotels ? (
           <div className="flex justify-center mt-10 duration-500">
             <Spinner size={30} color={'#04D7A4'} />

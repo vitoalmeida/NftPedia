@@ -16,49 +16,71 @@ const RectangleHotelCard: React.FC<Props> = ({ hotel }) => {
   // Modal state
   const [isModalOpen, setModalOpen] = useState(false);
 
+  function handleCloseModal() {
+    setModalOpen(false);
+  }
+
   return (
     <>
       <ReactModal
         className="modal"
         overlayClassName="modal-overlay"
         isOpen={isModalOpen}
+        onRequestClose={handleCloseModal}
       >
-        <div className="relative overflow-hidden w-[30rem] h-[30rem] rounded-3xl">
-          <div
-            className="z-20 absolute top-5 right-5 "
-            onClick={() => setModalOpen(false)}
-          >
-            <IoClose size="2rem" color="#FFF" />
+        <div className="flex flex-col w-[35rem] xl:w-[45rem] duration-500">
+          <div className="relative overflow-hidden w-full h-[30rem] rounded-3xl duration-500">
+            <div
+              className="z-20 absolute top-5 right-5 "
+              onClick={handleCloseModal}
+            >
+              <IoClose size="2rem" color="#FFF" />
+            </div>
+            <Carousel emulateTouch autoPlay showStatus={false}>
+              {hotel.images.map((image, index) => {
+                return (
+                  <div key={index} className="relative w-full h-[30rem]">
+                    <Image
+                      alt={`${hotel.name}-image`}
+                      src={image}
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </div>
+                );
+              })}
+            </Carousel>
           </div>
-          <Carousel emulateTouch autoPlay showStatus={false}>
-            {hotel.images.map((image, index) => {
-              return (
-                <div key={index} className="relative w-[30rem] h-[30rem]">
-                  <Image
-                    alt={`${hotel.name}-image`}
-                    src={image}
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                </div>
-              );
-            })}
-          </Carousel>
-        </div>
 
-        <div className="my-5 mb-8 px-12">
-          <h1 className="text-black font-bold text-[1.8rem] w-[24rem] h-auto break-words">
-            {hotel.name}
-          </h1>
-          <div className="flex mt-[0.2rem] items-center flex-row ml-[-0.2rem]">
-            <IoLocationSharp size="2rem" color="#FF4A4A" />
-            <p className="text-lg ml-2 font-bold text-dark-grey mr-8">
-              {hotel.city}
-            </p>
-            <IoStar size="2rem" color="#F2D32F" />
-            <p className="text-lg ml-2 font-bold text-dark-grey">
-              {hotel.stars}
-            </p>
+          <div className="my-5 mb-8 px-12 w-full">
+            <h1 className="text-black font-bold text-[1.8rem] w-[24rem] h-auto break-words">
+              {hotel.name}
+            </h1>
+            <div className="flex mt-[0.2rem] items-center flex-row ml-[-0.2rem]">
+              <IoLocationSharp size="2rem" color="#FF4A4A" />
+              <p className="text-lg ml-2 font-bold text-dark-grey mr-8">
+                {hotel.city}
+              </p>
+              <IoStar size="2rem" color="#F2D32F" />
+              <p className="text-lg ml-2 font-bold text-dark-grey">
+                {hotel.stars}
+              </p>
+            </div>
+            <span className="flex my-4 h-[0.4rem] w-full bg-light-grey rounded-full" />
+
+            <div className="ml-[-0.2rem] flex flex-col w-full h-[5.5rem] overflow-y-scroll overflow-x-hidden">
+              <p className="text-lg ml-2 font-medium text-black mr-8">
+                Sobre {hotel.name}
+              </p>
+              <p className="text-lg ml-2 w-full text-dark-grey mr-8 h-auto break-words">
+                {hotel.description}
+              </p>
+            </div>
+            <div className="flex w-full mt-8">
+              <p className="ml-auto font-medium text-2xl text-dark-green h-auto break-words">
+                R$ {hotel.price}
+              </p>
+            </div>
           </div>
         </div>
       </ReactModal>

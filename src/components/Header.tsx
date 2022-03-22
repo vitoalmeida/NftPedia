@@ -39,7 +39,7 @@ const Header: React.FC = () => {
     <>
       <div className="flex fixed z-20 w-full drop-shadow-2xl bg-white h-20 md:h-16 items-center justify-center md:justify-between md:px-24 xl:px-44 2xl:px-60 duration-500">
         <a href="/" className="w-44 md:w-36 hover:scale-110 duration-300">
-          <Image alt="NextPedia-logo" src="/logo.png" width="270" height="44" />
+          <Image alt="NextPedia-logo" src="/logo.png" width="714" height="114" quality={100} priority />
         </a>
         <span className="absolute right-6 md:relative md:right-0 cursor-pointer hover:scale-110 duration-300">
           {router.pathname === '/' ? (

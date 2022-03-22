@@ -70,7 +70,7 @@ const Home: React.FC = () => {
           content="Search and Find the best hotels for you"
         />
         <meta name="keywords" content="Hotels, Search, Booking" />
-        <meta name="author" content="Vitor Machad" />
+        <meta name="author" content="Vitor Machado" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 

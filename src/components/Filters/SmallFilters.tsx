@@ -1,11 +1,13 @@
 // Libraries
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ptBR } from 'date-fns/locale';
 import { DateRangePicker } from 'react-nice-dates';
 import 'react-nice-dates/build/style.css';
 import InputRange, { Range } from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
+// Reducer
+import { reducerHotel, initialState } from '../../store/hotels';
 // Components
 import Input from '../Input';
 import StarRating from '../StarRating';
@@ -19,10 +21,12 @@ interface Props {
 }
 
 const SmallFilters: React.FC<Props> = ({ filterValues, closeFilter }) => {
-  const router = useRouter();
+  // Reducer
+  const [hotelState, dispatch] = useReducer(reducerHotel, initialState);
+  const { loadingHotels } = hotelState;
 
-  // State to check submitting filters
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  // Router
+  const router = useRouter();
 
   // Going to filter state
   const [goingToFilter, setGoingToFilter] = useState(
@@ -59,8 +63,9 @@ const SmallFilters: React.FC<Props> = ({ filterValues, closeFilter }) => {
   // Function to get filter action
   function handleFilter(event) {
     event.preventDefault();
+    dispatch({ type: 'FILTER_HOTELS' });
     closeFilter();
-    setIsSubmitting(true);
+
     router.push({
       pathname: '/searchHotel',
       query: {
@@ -73,7 +78,7 @@ const SmallFilters: React.FC<Props> = ({ filterValues, closeFilter }) => {
         checkOut: endDate ? endDate.toISOString() : undefined,
       },
     });
-    setIsSubmitting(false);
+    dispatch({ type: 'FILTER_HOTELS_SUCCESS' });
   }
 
   return (
@@ -167,8 +172,8 @@ const SmallFilters: React.FC<Props> = ({ filterValues, closeFilter }) => {
           </div>
         </div>
 
-        <div className="mx-14 mt-44">
-          <Button isSubmitting={isSubmitting} text="FILTRAR"/>
+        <div className="mx-14 mt-44 pb-14">
+          <Button isSubmitting={loadingHotels} text="FILTRAR" />
         </div>
       </form>
     </div>

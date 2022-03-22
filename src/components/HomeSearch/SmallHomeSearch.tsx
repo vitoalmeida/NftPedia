@@ -69,7 +69,7 @@ const SmallHomeSearch: React.FC<Props> = ({
         locale={ptBR}
       >
         {({ startDateInputProps, endDateInputProps, focus }) => (
-          <div className="flex flex-col date-range justify-between px-10 pt-10 pb-8 mx-10 bg-white">
+          <div className="flex flex-col date-range justify-between px-10 pt-6 pb-8 mx-10 bg-white">
             <div className="flex flex-col">
               <p className="filter-text">Check in</p>
               <DateInput

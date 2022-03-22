@@ -6,7 +6,12 @@ const Footer: React.FC = () => {
   return (
     <div>
       <div id="second-wave" className="flex w-full mb-[-0.032rem] duration-500">
-        <Image alt="second-wave-division" src="/second-wave.png" width="2875" height="387" />
+        <Image
+          alt="third-wave-division"
+          src="/third-wave.png"
+          width="2560"
+          height="380"
+        />
       </div>
       <div
         id="footer"
@@ -22,14 +27,24 @@ const Footer: React.FC = () => {
             href="https://www.linkedin.com/in/vitormachado-work/"
             className="h-10 w-10"
           >
-            <Image alt="github-logo" src="/github.png" width="250" height="250" />
+            <Image
+              alt="github-logo"
+              src="/github.png"
+              width="250"
+              height="250"
+            />
           </a>
           <a
             target="_blank"
             href="https://github.com/vitoalmeida"
             className="h-10 w-10"
           >
-            <Image alt="linkedin-logo" src="/linkedin.png" width="250" height="250" />
+            <Image
+              alt="linkedin-logo"
+              src="/linkedin.png"
+              width="250"
+              height="250"
+            />
           </a>
         </div>
       </div>

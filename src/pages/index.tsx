@@ -81,7 +81,7 @@ const Home: React.FC = () => {
           id="home"
           className="relative overflow-hidden w-full h-[28rem] md:h-[40rem] duration-500 flex-row mt-[-1rem] md:mt-2"
         >
-          <div className="flex duration-500 flex-col ml-5 md:ml-24 lg:ml-36 xl:ml-48 2xl:ml-72 px-6 mt-36">
+          <div className="flex duration-500 flex-col ml-5 md:ml-24 lg:ml-36 xl:ml-48 2xl:ml-60 px-6 mt-36">
             <p className="home-title">
               Nós te
               <br />
@@ -106,14 +106,47 @@ const Home: React.FC = () => {
           <Image
             alt="first-wave-division"
             src="/first-wave.png"
-            width="2880"
-            height="730"
+            width="2560"
+            height="621"
           />
         </div>
 
         <div
+          id="about-us"
+          className="relative flex flex-col md:pb-56 lg:pb-72 2xl:pb-96 md:py-44 lg:py-56 2xl:py-72 w-full h-full pb-24 bg-[#FAFAFA] md:justify-start items-center md:items-start mt-[-0.2rem] duration-500"
+        >
+          <div className="relative md:absolute duration-500 md:left-[-11rem] lg:left-[-15rem] 2xl:left-[-13rem] top-[2rem] w-[22rem] h-[16rem] md:w-[44rem] md:h-[30rem] lg:w-[60rem] lg:h-[40rem] 2xl:w-[65rem] 2xl:h-[45rem]">
+            <Image alt="about-us" src="/about-us.jpg" layout="fill" />
+          </div>
+          <div
+            id="about-us-text"
+            className="z-10 flex flex-col duration-500 md:ml-auto md:mr-2 lg:mr-8 xl:mr-48 2xl:mr-60 px-8 md:px-6 mt-10 md:mt-0 "
+          >
+            <h1 className="font-bold text-3xl lg:text-[3rem] text-black text-center duration-500 2xl:mt-[-5rem]">
+              Sobre nós
+            </h1>
+            <p className="mt-2 lg:mt-5 font-semibold text-[1.2rem] lg:text-[1.5rem] 2xl:text-[2rem] text-[#454545] text-center duration-500">
+              Temos mais de <span className="text-dark-green">200 hoteis</span>
+              <br /> e mais de <span className="text-dark-green">5 anos</span>
+              <br /> de participação de mercado <br /> <br /> Garantimos um
+              hotel com a sua cara
+              <br /> ou seu dinheiro de volta
+            </p>
+          </div>
+        </div>
+
+        <div id="third-wave" className="flex w-full bg-[#FAFAFA]">
+          <Image
+            alt="second-wave-division"
+            src="/second-wave.png"
+            width="2560"
+            height="364"
+            quality={100}
+          />
+        </div>
+        <div
           id="search-hotel"
-          className="w-full h-[40rem] bg-light-grey justify-center"
+          className="w-full h-[40rem] bg-[#F7F7F7] justify-center mt-[-0.2rem]"
         >
           <h1 className="font-bold text-4xl text-black mx-10 mt-12 md:w-[40rem] lg:w-[60rem] 2xl:w-[80rem] md:mx-auto duration-500">
             Buscar Hoteis
@@ -181,7 +214,7 @@ const Home: React.FC = () => {
             </Formik>
           </div>
         </div>
-        <div className="bg-light-grey pt-44 md:pt-20">
+        <div className="bg-[#F7F7F7] pt-44">
           <Footer />
         </div>
       </main>

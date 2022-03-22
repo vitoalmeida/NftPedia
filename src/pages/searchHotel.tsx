@@ -78,7 +78,7 @@ const SearchHotel: React.FC<HotelList> = ({ hotelList }) => {
   });
 
   return (
-    <div className="relative h-full bg-gradient-to-b from-[#F4F4F4] to-white">
+    <div className="relative h-full bg-[#F4F4F4]">
       <Head>
         <title>Search - Nextpedia</title>
         <meta charSet="UTF-8" />
@@ -87,7 +87,7 @@ const SearchHotel: React.FC<HotelList> = ({ hotelList }) => {
         <meta name="author" content="Vitor Machado" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      
+
       <Header />
 
       <main className="flex flex-col pt-20 md:pt-16 pb-20 items-center h-full duration-500">
@@ -126,7 +126,7 @@ const SearchHotel: React.FC<HotelList> = ({ hotelList }) => {
             }
           })
         ) : (
-          <div className="flex flex-col mt-14 w-[20rem] md:w-[40rem] lg:w-[50rem] xl:w-[60rem] h-[40rem] justify-start items-center duration-500 md:bg-white py-20 rounded-3xl">
+          <div className="flex flex-col mt-14 w-[20rem] md:w-[40rem] lg:w-[50rem] xl:w-[60rem] h-[40rem] justify-start items-center duration-500 md:bg-gradient-to-b from-white to-[#F4F4F4] py-20 rounded-3xl">
             <p className="text-center text-2xl font-medium text-grey">
               Nenhum hotel encontrado <br />
               com os filtros atuais.
@@ -142,9 +142,9 @@ const SearchHotel: React.FC<HotelList> = ({ hotelList }) => {
           </div>
         )}
       </main>
-      {/* <div className="">
+      <div className="bg-[#F4F4F4] pt-10">
         <Footer />
-      </div> */}
+      </div>
     </div>
   );
 };

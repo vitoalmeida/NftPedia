@@ -7,6 +7,7 @@ interface Props {
   text: string;
   isSubmitting: boolean;
 }
+
 const Button: React.FC<Props> = ({ text = 'BUSCAR', isSubmitting = false }) => {
   return (
     <a href="#">

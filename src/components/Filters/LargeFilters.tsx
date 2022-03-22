@@ -1,35 +1,33 @@
 // Libraries
-import React, { useState } from 'react';
-import { Formik } from 'formik';
+import React, { useReducer, useState } from 'react';
+import { useRouter } from 'next/router';
 import { ptBR } from 'date-fns/locale';
 import { DateRangePicker } from 'react-nice-dates';
 import 'react-nice-dates/build/style.css';
 import InputRange, { Range } from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
+// Reducer
+import { reducerHotel, initialState } from '../../store/hotels';
 // Components
-import Input from './Input';
-import StarRating from './StarRating';
-import { useRouter } from 'next/router';
+import Input from '../Input';
+import StarRating from '../StarRating';
+import DateInput from '../DateInput';
 // Types
-import { Filter } from '../@types/general';
+import { Filter } from '../../@types/general';
+import Button from '../Button';
 
 interface Props {
   filterValues: Filter;
   closeFilter: Function;
 }
 
-interface InitialValues {
-  goingTo?: string;
-  travelers?: number;
-  checkIn?: Date;
-  checkOut?: Date;
-}
-
 const LargeFilters: React.FC<Props> = ({ filterValues, closeFilter }) => {
-  const router = useRouter();
+  // Reducer
+  const [hotelState, dispatch] = useReducer(reducerHotel, initialState);
+  const { loadingHotels } = hotelState;
 
-  // State to check submitting filters
-  const [isSubmitting, setisSubmitting] = useState(false);
+  // Router
+  const router = useRouter();
 
   // Going to filter state
   const [goingToFilter, setGoingToFilter] = useState(
@@ -66,21 +64,22 @@ const LargeFilters: React.FC<Props> = ({ filterValues, closeFilter }) => {
   // Function to get filter action
   function handleFilter(event) {
     event.preventDefault();
-    setisSubmitting(true);
+    dispatch({ type: 'FILTER_HOTELS' });
+    closeFilter();
+    
     router.push({
       pathname: '/searchHotel',
       query: {
         goingTo: goingToFilter || undefined,
         travelers: travelersFilter || undefined,
         price:
-          [String(priceFilter?.min), String(priceFilter?.max)] || undefined,
+        [String(priceFilter?.min), String(priceFilter?.max)] || undefined,
         stars: String(starsFilter) || undefined,
         checkIn: startDate ? startDate.toISOString() : undefined,
         checkOut: endDate ? endDate.toISOString() : undefined,
       },
     });
-    closeFilter(false);
-    setisSubmitting(false);
+    dispatch({ type: 'FILTER_HOTELS_SUCCESS' });
   }
 
   return (
@@ -93,7 +92,7 @@ const LargeFilters: React.FC<Props> = ({ filterValues, closeFilter }) => {
         <div id="left-filter">
           <h1 className="text-[2.5rem] text-black font-bold">Filtros</h1>
           <div className="flex flex-row items-center mt-2 justify-between">
-            <div className="flex-col mr-5">
+            <div className="flex-col mr-5 w-full">
               <p className="filter-text">Indo para</p>
               <div>
                 <Input
@@ -135,26 +134,22 @@ const LargeFilters: React.FC<Props> = ({ filterValues, closeFilter }) => {
           >
             {({ startDateInputProps, endDateInputProps, focus }) => (
               <div className="flex flex-row date-range justify-between">
-                <div className="flex flex-col">
+                <div className="flex flex-col mr-3">
                   <p className="filter-text">Check in</p>
-                  <input
-                    className={
-                      'border-[#DEDEDE] border-[0.1rem] rounded-xl px-3 py-2 w-40 lg:w-52 duration-500' +
-                      (focus === 'startDate' ? ' -focused' : '')
-                    }
-                    {...startDateInputProps}
+                  <DateInput
+                    focus={focus}
+                    dateInputProps={startDateInputProps}
+                    type="startDate"
                     placeholder="Início"
                   />
                 </div>
 
-                <div className="flex flex-col">
-                  <p className="filter-text">Check</p>
-                  <input
-                    className={
-                      'border-[#DEDEDE] border-[0.1rem] rounded-xl px-3 py-2 w-40 lg:w-52 duration-500' +
-                      (focus === 'endDate' ? ' -focused' : '')
-                    }
-                    {...endDateInputProps}
+                <div className="flex flex-col ml-3">
+                  <p className="filter-text">Check out</p>
+                  <DateInput
+                    focus={focus}
+                    dateInputProps={endDateInputProps}
+                    type="endDate"
                     placeholder="Fim"
                   />
                 </div>
@@ -190,14 +185,10 @@ const LargeFilters: React.FC<Props> = ({ filterValues, closeFilter }) => {
         <span className="filter-y-line ml-16 xl:ml-28" />
 
         <div className="absolute bottom-10 left-0 w-full">
-          <div className="flex relative lg:w-[55rem] xl:w-[68.5rem] mx-auto px-10 duration-500">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="flex-1 w-[5rem] h-14 rounded-2xl bg-dark-green text-xl text-white font-bold border-[#00b587] border-b-[0.4rem]"
-            >
-              FILTRAR
-            </button>
+          <div className="flex relative lg:w-[66rem] xl:w-[79rem] mx-auto px-10 duration-500">
+            <div className="w-full">
+              <Button isSubmitting={loadingHotels} text="FILTRAR" />
+            </div>
           </div>
         </div>
       </form>

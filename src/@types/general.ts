@@ -20,3 +20,21 @@ export interface Filter {
   checkIn?: string | string[];
   checkOut?: string | string[];
 }
+
+export interface InitialValues {
+  goingTo?: string;
+  travelers?: number;
+  checkIn?: Date | null;
+  checkOut?: Date | null;
+}
+
+export interface InitialValuesError {
+  goingTo?: string;
+  travelers?: string;
+  checkIn?: string;
+  checkOut?: string;
+}
+
+export interface HotelState {
+  loadingHotels: boolean;
+}

@@ -4,8 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaTimes, FaSearch, FaSlidersH } from 'react-icons/fa';
 // Components
-import SmallFilters from './SmallFilters';
-import LargeFilters from './LargeFilters';
+import SmallFilters from './Filters/SmallFilters';
+import LargeFilters from './Filters/LargeFilters';
 import { useRouter } from 'next/router';
 
 const Header: React.FC = () => {
@@ -24,19 +24,24 @@ const Header: React.FC = () => {
     setMobile(window.innerWidth < 770);
   };
 
+  // Function close filter
+  function closeFilter() {
+    setFilterOpen(false);
+  }
+  
   useEffect(() => {
     setMobile(window.innerWidth < 770);
-    window.addEventListener('resize', updateMedia);
+    window.addEventListener('resize', updateMedia, { passive: true });
     return () => window.removeEventListener('resize', updateMedia);
   });
 
   return (
     <>
       <div className="flex fixed z-20 w-full drop-shadow-2xl bg-white h-20 md:h-16 items-center justify-center md:justify-between md:px-24 xl:px-44 2xl:px-60 duration-500">
-        <a href="/" className="w-44 md:w-36">
-          <Image src="/logo.png" alt="logo" width="270" height="44" />
+        <a href="/" className="w-44 md:w-36 hover:scale-110 duration-300">
+          <Image alt="NextPedia-logo" src="/logo.png" width="270" height="44" />
         </a>
-        <span className="absolute right-6 md:relative md:right-0">
+        <span className="absolute right-6 md:relative md:right-0 cursor-pointer hover:scale-110 duration-300">
           {router.pathname === '/' ? (
             <Link href="#first-wave">
               <FaSearch size={'2rem'} color="#04D7A4" />
@@ -67,7 +72,7 @@ const Header: React.FC = () => {
               stars,
               price,
             }}
-            closeFilter={setFilterOpen}
+            closeFilter={closeFilter}
           />
         ) : (
           <LargeFilters
@@ -79,7 +84,7 @@ const Header: React.FC = () => {
               stars,
               price,
             }}
-            closeFilter={setFilterOpen}
+            closeFilter={closeFilter}
           />
         )}
       </div>

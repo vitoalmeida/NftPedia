@@ -1,33 +1,28 @@
 // Libraries
 import React, { useState } from 'react';
-import { Formik } from 'formik';
+import { useRouter } from 'next/router';
 import { ptBR } from 'date-fns/locale';
 import { DateRangePicker } from 'react-nice-dates';
 import 'react-nice-dates/build/style.css';
 import InputRange, { Range } from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
 // Components
-import Input from './Input';
-import StarRating from './StarRating';
-import { useRouter } from 'next/router';
+import Input from '../Input';
+import StarRating from '../StarRating';
 // Types
-import { Filter } from '../@types/general';
+import { Filter } from '../../@types/general';
+import Button from '../Button';
 
 interface Props {
   filterValues: Filter;
   closeFilter: Function;
 }
 
-interface InitialValues {
-  goingTo?: string;
-  travelers?: number;
-}
-
 const SmallFilters: React.FC<Props> = ({ filterValues, closeFilter }) => {
   const router = useRouter();
 
   // State to check submitting filters
-  const [isSubmitting, setisSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Going to filter state
   const [goingToFilter, setGoingToFilter] = useState(
@@ -64,7 +59,8 @@ const SmallFilters: React.FC<Props> = ({ filterValues, closeFilter }) => {
   // Function to get filter action
   function handleFilter(event) {
     event.preventDefault();
-    setisSubmitting(true);
+    closeFilter();
+    setIsSubmitting(true);
     router.push({
       pathname: '/searchHotel',
       query: {
@@ -77,8 +73,7 @@ const SmallFilters: React.FC<Props> = ({ filterValues, closeFilter }) => {
         checkOut: endDate ? endDate.toISOString() : undefined,
       },
     });
-    closeFilter(false);
-    setisSubmitting(false);
+    setIsSubmitting(false);
   }
 
   return (
@@ -173,13 +168,7 @@ const SmallFilters: React.FC<Props> = ({ filterValues, closeFilter }) => {
         </div>
 
         <div className="mx-14 mt-44">
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="flex-1 w-full mb-16 h-14 rounded-2xl bg-dark-green text-xl text-white font-bold border-[#00b587] border-b-[0.4rem]"
-          >
-            FILTRAR
-          </button>
+          <Button isSubmitting={isSubmitting} text="FILTRAR"/>
         </div>
       </form>
     </div>

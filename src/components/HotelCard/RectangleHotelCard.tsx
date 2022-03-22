@@ -6,7 +6,7 @@ import ReactModal from 'react-modal';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 // Types
-import { Hotel } from '../@types/general';
+import { Hotel } from '../../@types/general';
 
 interface Props {
   hotel: Hotel;
@@ -31,10 +31,15 @@ const RectangleHotelCard: React.FC<Props> = ({ hotel }) => {
             <IoClose size="2rem" color="#FFF" />
           </div>
           <Carousel emulateTouch autoPlay showStatus={false}>
-            {hotel.images.map(image => {
+            {hotel.images.map((image, index) => {
               return (
-                <div className="relative w-[30rem] h-[30rem]">
-                  <Image src={image} layout="fill" objectFit="cover" />
+                <div key={index} className="relative w-[30rem] h-[30rem]">
+                  <Image
+                    alt={`${hotel.name}-image`}
+                    src={image}
+                    layout="fill"
+                    objectFit="cover"
+                  />
                 </div>
               );
             })}
@@ -64,6 +69,7 @@ const RectangleHotelCard: React.FC<Props> = ({ hotel }) => {
       >
         <div className="w-32 md:w-40 lg:w-44">
           <Image
+            alt={`${hotel.name}-image`}
             src={hotel.images[0]}
             className="rounded-tl-[1.2rem] rounded-bl-[1.5rem]"
             width="1230"
@@ -100,6 +106,7 @@ const RectangleHotelCard: React.FC<Props> = ({ hotel }) => {
         >
           <div className="w-28 h-28 md:w-40 md:h-40 lg:w-44">
             <Image
+              alt="price-cantainer"
               src={'/price-vector.png'}
               width="800"
               height="800"

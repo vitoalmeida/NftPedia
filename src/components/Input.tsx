@@ -1,3 +1,4 @@
+// Libraries
 import React from 'react';
 import * as Icons from 'react-icons/hi';
 
@@ -6,6 +7,7 @@ interface Props {
   placeholder: string;
   icon?: string;
   type?: string;
+  required?: boolean;
   onChange: any;
   value: any;
   onBlur?: any;
@@ -19,6 +21,7 @@ const Input: React.FC<Props> = ({
   placeholder,
   type = 'text',
   icon,
+  required,
 }) => {
   let renderIcon;
   if (icon === 'calendar') {
@@ -30,7 +33,7 @@ const Input: React.FC<Props> = ({
   }
 
   return (
-    <div className="input-conteiner">
+    <div className="input-cantainer">
       <div id="icon" className="absolute px-3 py-2">
         {renderIcon}
       </div>
@@ -43,6 +46,7 @@ const Input: React.FC<Props> = ({
         onChange={onChange}
         value={value}
         onBlur={onBlur || undefined}
+        required={required || false}
       />
     </div>
   );

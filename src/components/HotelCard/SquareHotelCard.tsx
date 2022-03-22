@@ -6,7 +6,8 @@ import ReactModal from 'react-modal';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 // Types
-import { Hotel } from '../@types/general';
+import { Hotel } from '../../@types/general';
+
 interface Props {
   hotel: Hotel;
 }
@@ -30,10 +31,15 @@ const SquareHotelCard: React.FC<Props> = ({ hotel }) => {
             <IoClose size="2rem" color="#FFF" />
           </div>
           <Carousel emulateTouch autoPlay showStatus={false}>
-            {hotel.images.map(image => {
+            {hotel.images.map((image, index) => {
               return (
-                <div className="relative w-[30rem] h-[30rem]">
-                  <Image src={image} layout="fill" objectFit="cover" />
+                <div key={index} className="relative w-[30rem] h-[30rem]">
+                  <Image
+                    alt={`${hotel.name}-image`}
+                    src={image}
+                    layout="fill"
+                    objectFit="cover"
+                  />
                 </div>
               );
             })}
@@ -62,6 +68,7 @@ const SquareHotelCard: React.FC<Props> = ({ hotel }) => {
       >
         <div id="hotel-image" className="absolute w-[20rem]">
           <Image
+            alt="price-cantainer"
             src={hotel.images[0]}
             className="rounded-[1.5rem]"
             width="1230"
@@ -73,6 +80,7 @@ const SquareHotelCard: React.FC<Props> = ({ hotel }) => {
           <div id="description-container" className="flex absolute bottom-0">
             <div id="card-wave" className="absolute bottom-[-2.2rem] w-[20rem]">
               <Image
+                alt="card-wave"
                 src={'/card-wave.png'}
                 width="800"
                 height="450

@@ -29,7 +29,7 @@ const SquareHotelCard: React.FC<Props> = ({ hotel }) => {
         isOpen={isModalOpen}
         onRequestClose={handleCloseModal}
       >
-        <div className="relative overflow-hidden w-[21rem] h-[21rem] rounded-3xl">
+        <div className="relative overflow-hidden w-[21rem] h-[15rem] rounded-3xl">
           <div
             className="z-20 absolute top-5 right-5 "
             onClick={handleCloseModal}
@@ -39,7 +39,7 @@ const SquareHotelCard: React.FC<Props> = ({ hotel }) => {
           <Carousel emulateTouch autoPlay showStatus={false}>
             {hotel.images.map((image, index) => {
               return (
-                <div key={index} className="relative w-[21.1rem] h-[21.1rem]">
+                <div key={index} className="relative w-[21.1rem] h-[15rem]">
                   <Image
                     alt={`${hotel.name}-image`}
                     src={image}
@@ -53,7 +53,7 @@ const SquareHotelCard: React.FC<Props> = ({ hotel }) => {
         </div>
 
         <div className="my-5 mb-8 px-9 w-[21rem]">
-          <h1 className="text-black font-bold text-[1.8rem] w-[14rem] h-auto break-words">
+          <h1 className="text-black max-h-20 overflow-y-hidden font-bold text-[1.8rem] w-[14rem] h-auto break-words">
             {hotel.name}
           </h1>
           <div className="flex mt-[0.2rem] items-center flex-row ml-[-0.2rem]">
@@ -92,7 +92,7 @@ const SquareHotelCard: React.FC<Props> = ({ hotel }) => {
       >
         <div id="hotel-image" className="absolute w-[20rem]">
           <Image
-            alt="price-cantainer"
+            alt="price-container"
             src={hotel.images[0]}
             className="rounded-[1.5rem]"
             width="1230"
@@ -107,9 +107,9 @@ const SquareHotelCard: React.FC<Props> = ({ hotel }) => {
                 alt="card-wave"
                 src={'/card-wave.png'}
                 width="800"
-                height="450
-            "
+                height="450"
                 layout={'responsive'}
+                priority
               />
               <div className="absolute w-full h-full pt-[4.5rem] bottom-0 px-6 overflow-hidden">
                 <h1 className="ml-[0.15rem] text-2xl font-bold text-black overflow-hidden whitespace-nowrap text-ellipsis">

@@ -108,6 +108,7 @@ const Home: React.FC = () => {
             src="/first-wave.png"
             width="2560"
             height="621"
+            priority
           />
         </div>
 
@@ -135,18 +136,19 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        <div id="third-wave" className="flex w-full bg-[#FAFAFA]">
+        <div id="second-wave" className="flex w-full bg-[#FAFAFA]">
           <Image
             alt="second-wave-division"
             src="/second-wave.png"
             width="2560"
             height="364"
             quality={100}
+            priority
           />
         </div>
         <div
           id="search-hotel"
-          className="w-full h-[40rem] bg-[#F7F7F7] justify-center mt-[-0.2rem]"
+          className="w-full h-[40rem] bg-[#F4F4F4] justify-center mt-[-0.2rem]"
         >
           <h1 className="font-bold text-4xl text-black mx-10 mt-12 md:w-[40rem] lg:w-[60rem] 2xl:w-[80rem] md:mx-auto duration-500">
             Buscar Hoteis
@@ -214,7 +216,7 @@ const Home: React.FC = () => {
             </Formik>
           </div>
         </div>
-        <div className="bg-[#F7F7F7] pt-44">
+        <div className="bg-[#F4F4F4] pt-44">
           <Footer />
         </div>
       </main>

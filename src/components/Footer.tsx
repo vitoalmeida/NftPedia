@@ -11,11 +11,12 @@ const Footer: React.FC = () => {
           src="/third-wave.png"
           width="2560"
           height="380"
+          priority
         />
       </div>
       <div
         id="footer"
-        className="flex w-full pb-8 px-10 md:px-20 xl:px-32 h-20 bg-greyish flex-row pt-6 justify-between items-center duration-500"
+        className="flex w-full pb-8 px-10 md:px-20 xl:px-32 h-20 bg-[#ECECEC] flex-row pt-6 justify-between items-center duration-500"
       >
         <p className="font-medium text-black">
           Worked by&nbsp;

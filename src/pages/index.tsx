@@ -9,8 +9,7 @@ import { reducerHotel, initialState } from '../store/hotels';
 // Components
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import SmallHomeSearch from '../components/HomeSearch/SmallHomeSearch';
-import LargeHomeSearch from '../components/HomeSearch/LargeHomeSearch';
+import LargeHomeSearch from '../components/HomeSearch';
 // Types
 import { InitialValues, InitialValuesError } from '../@types/general';
 
@@ -22,37 +21,20 @@ const Home: React.FC = () => {
   // Router
   const router = useRouter();
 
-  // Initial form values 
+  // Initial form values
   const initialValues: InitialValues = {
-    goingTo: undefined,
-    travelers: 1,
-    checkIn: new Date(),
-    checkOut: new Date(new Date().setDate(new Date().getDate() + 1)),
+    walletAddress: undefined,
+    nftAddress: undefined,
   };
-
-  // Window width state
-  const [isMobile, setMobile] = useState<boolean>();
-  // Function to get screen type
-  const updateMedia = () => {
-    setMobile(window.innerWidth < 770);
-  };
-
-  useEffect(() => {
-    setMobile(window.innerWidth < 770);
-    window.addEventListener('resize', updateMedia);
-    return () => window.removeEventListener('resize', updateMedia);
-  });
 
   function handleSearch(values: InitialValues) {
     dispatch({ type: 'FILTER_HOTELS' });
 
     router.push({
-      pathname: '/searchHotel',
+      pathname: '/searchNFTs',
       query: {
-        goingTo: values.goingTo,
-        travelers: values.travelers,
-        checkIn: values.checkIn ? values.checkIn.toISOString() : undefined,
-        checkOut: values.checkOut ? values.checkOut.toISOString() : undefined,
+        walletAddress: values.walletAddress,
+        nftAddress: values.nftAddress,
       },
     });
   }
@@ -86,7 +68,7 @@ const Home: React.FC = () => {
             </p>
             <span className="home-title text-dark-green">
               encontrar um <br />
-              hotel
+              NFT
             </span>
             <p className="home-title">
               que seja a sua
@@ -147,27 +129,24 @@ const Home: React.FC = () => {
           id="search-hotel"
           className="w-full h-[40rem] bg-[#F4F4F4] justify-center mt-[-0.2rem]"
         >
-          <h1 className="font-bold text-4xl text-black mx-10 mt-12 md:w-[40rem] lg:w-[60rem] 2xl:w-[80rem] md:mx-auto duration-500">
-            Buscar Hoteis
+          <h1 className="font-bold text-4xl text-black mx-10 mt-32 md:w-[40rem] lg:w-[60rem] 2xl:w-[80rem] md:mx-auto duration-500">
+            Exploração
           </h1>
-          <div className="flex flex-col w-full py-8">
+          <div className="flex flex-col w-full py-4">
             <Formik
+              validateOnChange={false}
+              validateOnBlur={false}
               initialValues={initialValues}
               validate={values => {
                 const errors: InitialValuesError = {};
-                if (!values.goingTo) {
-                  errors.goingTo = 'Required';
+                if (!values.walletAddress) {
+                  errors.walletAddress = 'Preencha este campo';
+                } else if (values.walletAddress?.length != 42) {
+                  errors.walletAddress = 'Endereço incorreto';
                 }
-                if (!values.travelers) {
-                  errors.travelers = 'Required';
+                if (values.nftAddress && values.nftAddress?.length != 42) {
+                  errors.nftAddress = 'Endereço incorreto';
                 }
-                if (!values.checkIn) {
-                  errors.checkIn = 'Required';
-                }
-                if (!values.checkOut) {
-                  errors.checkOut = 'Required';
-                }
-
                 return errors;
               }}
               onSubmit={(values, { setSubmitting }) => {
@@ -187,33 +166,21 @@ const Home: React.FC = () => {
                 setFieldValue,
               }) => (
                 <form onSubmit={handleSubmit}>
-                  {isMobile ? (
-                    <SmallHomeSearch
-                      values={values}
-                      errors={errors}
-                      touched={touched}
-                      handleChange={handleChange}
-                      handleBlur={handleBlur}
-                      isSubmitting={loadingHotels}
-                      setFieldValue={setFieldValue}
-                    />
-                  ) : (
-                    <LargeHomeSearch
-                      values={values}
-                      errors={errors}
-                      touched={touched}
-                      handleChange={handleChange}
-                      handleBlur={handleBlur}
-                      isSubmitting={loadingHotels}
-                      setFieldValue={setFieldValue}
-                    />
-                  )}
+                  <LargeHomeSearch
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    isSubmitting={loadingHotels}
+                    setFieldValue={setFieldValue}
+                  />
                 </form>
               )}
             </Formik>
           </div>
         </div>
-        <div className="bg-[#F4F4F4] pt-44">
+        <div className="bg-[#F4F4F4] pt-30">
           <Footer />
         </div>
       </main>

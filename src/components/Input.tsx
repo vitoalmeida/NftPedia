@@ -1,6 +1,7 @@
 // Libraries
 import React from 'react';
-import * as Icons from 'react-icons/hi';
+import { IoCloseCircle } from 'react-icons/io5';
+import { BiCoin, BiWallet } from 'react-icons/bi';
 
 interface Props {
   name: string;
@@ -11,6 +12,7 @@ interface Props {
   onChange: any;
   value: any;
   onBlur?: any;
+  errors?: string;
 }
 
 const Input: React.FC<Props> = ({
@@ -22,14 +24,15 @@ const Input: React.FC<Props> = ({
   type = 'text',
   icon,
   required,
+  errors,
 }) => {
   let renderIcon;
-  if (icon === 'calendar') {
-    renderIcon = <Icons.HiCalendar size="1.5rem" color="#999999" />;
-  } else if (icon === 'users') {
-    renderIcon = <Icons.HiUsers size="1.5rem" color="#999999" />;
+  if (icon === 'wallet') {
+    renderIcon = <BiWallet size="1.5rem" color="#999999" />;
+  } else if (icon === 'coin') {
+    renderIcon = <BiCoin size="1.5rem" color="#999999" />;
   } else {
-    renderIcon = <Icons.HiLocationMarker size="1.5rem" color="#999999" />;
+    renderIcon = <IoCloseCircle size="1.5rem" color="#999999" />;
   }
 
   return (
@@ -46,8 +49,11 @@ const Input: React.FC<Props> = ({
         onChange={onChange}
         value={value}
         onBlur={onBlur || undefined}
-        required={required || false}
+        required={required || (errors && errors.length > 0) || false}
       />
+      <div id="errors" className="absolute mt-[-0.8rem] text-red text-sm">
+        {errors}
+      </div>
     </div>
   );
 };

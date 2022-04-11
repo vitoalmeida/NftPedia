@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Spinner } from 'react-activity';
 import 'react-activity/dist/library.css';
 // API
-import { getHotels } from '../services/api';
+import { getHotels, fetchNFTs } from '../services/api';
 // Reducer
 import { reducerHotel, initialState } from '../store/hotels';
 // Components
@@ -19,50 +19,36 @@ import generalHelpers from '../helpers/filter';
 // Types
 import { Hotel } from '../@types/general';
 
-interface HotelList {
-  hotelList: Hotel[];
+interface Props {
+  NFTsList: any;
 }
 
-const SearchHotel: React.FC<HotelList> = ({ hotelList }) => {
+const SearchNFTs: React.FC<Props> = ({ NFTsList }) => {
   // Reducer
   const [hotelState, dispatch] = useReducer(reducerHotel, initialState);
   const { loadingHotels } = hotelState;
 
   // Route params
   const router = useRouter();
-  const { goingTo, travelers, checkIn, checkOut, stars, price } = router.query;
+  const { walletAddress, nftAddress } = router.query;
+  console.log('query', walletAddress, nftAddress);
 
-  // Filtered Hotels
-  const [filteredHotels, setFilteredHotels] = useState<Hotel[]>(
-    generalHelpers.filterHotels(
-      {
-        goingTo: goingTo,
-        travelers: travelers,
-        checkIn: checkIn,
-        checkOut: checkOut,
-        stars: stars,
-        price: price,
-      },
-      hotelList
-    )
-  );
-
-  useEffect(() => {
-    setFilteredHotels(
-      generalHelpers.filterHotels(
-        {
-          goingTo: goingTo,
-          travelers: travelers,
-          checkIn: checkIn,
-          checkOut: checkOut,
-          stars: stars,
-          price: price,
-        },
-        hotelList
-      )
-    );
-    dispatch({ type: 'FILTER_HOTELS_SUCCESS' });
-  }, [router]);
+  // useEffect(() => {
+  //   setFilteredHotels(
+  //     generalHelpers.filterHotels(
+  //       {
+  //         goingTo: goingTo,
+  //         travelers: travelers,
+  //         checkIn: checkIn,
+  //         checkOut: checkOut,
+  //         stars: stars,
+  //         price: price,
+  //       },
+  //       hotelList
+  //     )
+  //   );
+  //   dispatch({ type: 'FILTER_HOTELS_SUCCESS' });
+  // }, [router]);
 
   // Window width state
   const [isMobile, setMobile] = useState<boolean>();
@@ -80,10 +66,10 @@ const SearchHotel: React.FC<HotelList> = ({ hotelList }) => {
   return (
     <div className="relative h-full bg-[#F4F4F4]">
       <Head>
-        <title>Search - Nextpedia</title>
+        <title>Search - NFTsPedia</title>
         <meta charSet="UTF-8" />
         <meta name="description" content="Search results" />
-        <meta name="keywords" content="Hotels, Search, Booking" />
+        <meta name="keywords" content="NFTs, Search" />
         <meta name="author" content="Vitor Machado" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
@@ -99,28 +85,28 @@ const SearchHotel: React.FC<HotelList> = ({ hotelList }) => {
         <div className="mt-10 w-[20rem] md:w-[40rem] lg:w-[50rem] xl:w-[60rem] duration-500 mb-[-2rem]">
           <h1 className="font-extrabold text-[1.7rem] md:text-[2rem] xl:text-[2.5rem] text-black duration-500">
             Resultados para
-            {goingTo ? (
+            {/* {goingTo ? (
               <>
                 <span className="text-dark-black">: {` `}</span>
                 <span className="text-dark-green">'{goingTo}'</span>
               </>
             ) : (
               <span>{` `} sua busca</span>
-            )}
+            )} */}
           </h1>
         </div>
-        {filteredHotels.length > 0 ? (
-          filteredHotels.map((hotel, key) => {
+        {NFTsList.length > 0 ? (
+          NFTsList.map((NFT, key) => {
             if (isMobile) {
               return (
                 <div key={key}>
-                  <SquareHotelCard hotel={hotel} />
+                  <SquareHotelCard hotel={NFT.value} />
                 </div>
               );
             } else {
               return (
                 <div key={key}>
-                  <RectangleHotelCard hotel={hotel} />
+                  <RectangleHotelCard NFT={NFT.value} />
                 </div>
               );
             }
@@ -140,7 +126,7 @@ const SearchHotel: React.FC<HotelList> = ({ hotelList }) => {
               />
             </div>
           </div>
-        )}
+        )} 
       </main>
       <div className="bg-[#F4F4F4] pt-10">
         <Footer />
@@ -149,14 +135,15 @@ const SearchHotel: React.FC<HotelList> = ({ hotelList }) => {
   );
 };
 
-export async function getStaticProps() {
-  const hotelList = await getHotels();
+export async function getServerSideProps(context) {
+  const { walletAddress, nftAddress } = context.query;
+  const NFTsList = await fetchNFTs(walletAddress, nftAddress);
 
   return {
     props: {
-      hotelList,
+      NFTsList,
     },
   };
 }
 
-export default SearchHotel;
+export default SearchNFTs;

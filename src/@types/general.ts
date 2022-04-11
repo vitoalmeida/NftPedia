@@ -1,15 +1,10 @@
-export interface Hotel {
-  id: string;
-  name: string;
-  country: string;
-  city: string;
-  price: number;
-  images: string[];
-  date_start: string;
-  date_end: string;
-  stars: number;
-  rating: number;
-  description: string;
+export interface NFT {
+  id: string | null;
+  contractAddress: string | null;
+  image: string | null;
+  title: string | null;
+  description: string | null;
+  attributes: string | null;
 }
 
 export interface Filter {
@@ -22,17 +17,13 @@ export interface Filter {
 }
 
 export interface InitialValues {
-  goingTo?: string;
-  travelers?: number;
-  checkIn?: Date | null;
-  checkOut?: Date | null;
+  walletAddress?: string;
+  nftAddress?: string;
 }
 
 export interface InitialValuesError {
-  goingTo?: string;
-  travelers?: string;
-  checkIn?: string;
-  checkOut?: string;
+  walletAddress?: string;
+  nftAddress?: string;
 }
 
 export interface HotelState {

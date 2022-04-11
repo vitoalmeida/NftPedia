@@ -1,6 +1,7 @@
 // Libraries
 import React from 'react';
 import Image from 'next/image';
+import { IoLogoLinkedin, IoLogoGithub } from 'react-icons/io5';
 
 const Footer: React.FC = () => {
   return (
@@ -28,24 +29,14 @@ const Footer: React.FC = () => {
             href="https://www.linkedin.com/in/vitormachado-work/"
             className="h-10 w-10"
           >
-            <Image
-              alt="github-logo"
-              src="/github.png"
-              width="250"
-              height="250"
-            />
+            <IoLogoLinkedin size="2.5rem" color="#04D7A4" />
           </a>
           <a
             target="_blank"
             href="https://github.com/vitoalmeida"
             className="h-10 w-10"
           >
-            <Image
-              alt="linkedin-logo"
-              src="/linkedin.png"
-              width="250"
-              height="250"
-            />
+            <IoLogoGithub size="2.5rem" color="#04D7A4" />
           </a>
         </div>
       </div>

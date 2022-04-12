@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Spinner } from 'react-activity';
 import 'react-activity/dist/library.css';
 // API
-import { getHotels, fetchNFTs } from '../services/api';
+import { fetchNFTs } from '../services/api';
 // Reducer
 import { reducerHotel, initialState } from '../store/hotels';
 // Components
@@ -17,7 +17,7 @@ import SquareHotelCard from '../components/HotelCard/SquareHotelCard';
 // Helpers
 import generalHelpers from '../helpers/filter';
 // Types
-import { Hotel } from '../@types/general';
+import { NFT } from '../@types/general';
 
 interface Props {
   NFTsList: any;
@@ -76,7 +76,7 @@ const SearchNFTs: React.FC<Props> = ({ NFTsList }) => {
 
       <Header />
 
-      <main className="flex flex-col pt-20 md:pt-16 pb-20 items-center h-full duration-500">
+      <main className="flex flex-col px-[3rem] md:px-[6rem] xl:px-[11rem] 2xl:px-[15rem] pt-20 md:pt-16 pb-20  w-full h-full duration-500">
         {loadingHotels ? (
           <div className="flex justify-center mt-10 duration-500">
             <Spinner size={30} color={'#04D7A4'} />
@@ -95,38 +95,39 @@ const SearchNFTs: React.FC<Props> = ({ NFTsList }) => {
             )} */}
           </h1>
         </div>
-        {NFTsList.length > 0 ? (
-          NFTsList.map((NFT, key) => {
-            if (isMobile) {
-              return (
-                <div key={key}>
-                  <SquareHotelCard hotel={NFT.value} />
-                </div>
-              );
-            } else {
-              return (
-                <div key={key}>
-                  <RectangleHotelCard NFT={NFT.value} />
-                </div>
-              );
-            }
-          })
-        ) : (
-          <div className="flex flex-col mt-14 w-[20rem] md:w-[40rem] lg:w-[50rem] xl:w-[60rem] h-[40rem] justify-start items-center duration-500 md:bg-gradient-to-b from-white to-[#F4F4F4] py-20 rounded-3xl">
-            <p className="text-center text-2xl font-medium text-grey">
-              Nenhum hotel encontrado <br />
-              com os filtros atuais.
-            </p>
-            <div className="relative mt-5 w-[18rem] h-[18rem] md:w-[25rem] md:h-[25rem] xl:w-[30rem] xl:h-[30rem] duration-500">
-              <Image
-                alt={'dont-find-hotel'}
-                src={'/dont-find.png'}
-                layout="fill"
-                objectFit="cover"
-              />
+        <div id="nft-list" className="flex min flex-row flex-wrap justify-between">
+          {NFTsList?.length > 0 ? (
+            NFTsList.map((NFT, key) => {
+              if (isMobile) {
+                return (
+                  <div key={key}>
+                    <SquareHotelCard NFT={NFT.value} />
+                  </div>
+                );
+              } else {
+                return (
+                  <div key={key} className="ml-2">
+                    <RectangleHotelCard NFT={NFT.value} />
+                  </div>
+                );
+              }
+            })
+          ) : (
+            <div className="flex flex-col mt-14 w-[20rem] md:w-[40rem] lg:w-[50rem] xl:w-[60rem] h-[40rem] justify-start items-center duration-500 md:bg-gradient-to-b from-white to-[#F4F4F4] py-20 rounded-3xl">
+              <p className="text-center text-2xl font-medium text-grey">
+                Nenhum NFT encontrado!
+              </p>
+              <div className="relative mt-5 w-[18rem] h-[18rem] md:w-[25rem] md:h-[25rem] xl:w-[30rem] xl:h-[30rem] duration-500">
+                <Image
+                  alt={'dont-find-hotel'}
+                  src={'/dont-find.png'}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
             </div>
-          </div>
-        )} 
+          )}
+        </div>
       </main>
       <div className="bg-[#F4F4F4] pt-10">
         <Footer />
@@ -137,7 +138,7 @@ const SearchNFTs: React.FC<Props> = ({ NFTsList }) => {
 
 export async function getServerSideProps(context) {
   const { walletAddress, nftAddress } = context.query;
-  const NFTsList = await fetchNFTs(walletAddress, nftAddress);
+  const NFTsList = (await fetchNFTs(walletAddress, nftAddress)) || null;
 
   return {
     props: {

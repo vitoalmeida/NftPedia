@@ -25,6 +25,18 @@ export interface InitialValuesError {
   walletAddress?: string;
   nftAddress?: string;
 }
+export interface nftMetadata {
+  url?: string;
+  name?: string;
+  description?: string;
+  image?: string;
+}
+
+export interface MinterValuesError {
+  url?: string;
+  name?: string;
+  description?: string;
+}
 
 export interface HotelState {
   loadingHotels: boolean;

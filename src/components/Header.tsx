@@ -2,7 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+//Icons
 import { FaTimes, FaSearch, FaSlidersH } from 'react-icons/fa';
+import { IoHammer } from 'react-icons/io5';
+import { TiHome } from 'react-icons/ti';
 // Components
 import SmallFilters from './Filters/SmallFilters';
 import LargeFilters from './Filters/LargeFilters';
@@ -42,7 +45,7 @@ const Header: React.FC = () => {
           <div className="w-44 md:w-36 hover:scale-110 duration-300 cursor-pointer">
             <Image
               alt="NFTsPedia-logo"
-              src="/logo.png"
+              src="/logo.svg"
               width="714"
               height="114"
               quality={100}
@@ -50,18 +53,55 @@ const Header: React.FC = () => {
             />
           </div>
         </Link>
-        <span className="absolute right-6 md:relative md:right-0 cursor-pointer hover:scale-110 duration-300">
-          {router.pathname === '/' ? (
-            <Link href="#second-wave">
-              <FaSearch size={'2rem'} color="#04D7A4" />
-            </Link>
+        <span className="absolute right-6 md:relative md:right-0 cursor-pointer">
+          {isMobile ? (
+            <div className="flex">
+              <Link href="/">
+                <TiHome className="mr-[0.9rem]" size={'1.7rem'} color="#000" />
+              </Link>
+              <Link href="/minter">
+                <IoHammer
+                  className="mr-[0.9rem]"
+                  size={'1.7rem'}
+                  color="#000"
+                />
+              </Link>
+              <Link href="#second-wave">
+                <FaSearch size={'1.5rem'} color="#000" />
+              </Link>
+            </div>
           ) : (
-            <div onClick={() => setFilterOpen(!filterIsOpen)}>
-              {filterIsOpen ? (
-                <FaTimes size={'2rem'} color="#04D7A4" />
-              ) : (
-                <FaSlidersH size={'2rem'} color="#04D7A4" />
-              )}
+            <div className="flex flex-row">
+              <Link href="/">
+                <div className="flex flex-row items-center mr-7 hover:scale-105 duration-300">
+                  <TiHome
+                    className="mr-[0.4rem]"
+                    size={'1.7rem'}
+                    color="#000"
+                  />
+                  <a className="font-medium text-[1.4rem]">Home</a>
+                </div>
+              </Link>
+              <Link href="/minter">
+                <div className="flex flex-row items-center mr-7 hover:scale-105 duration-300">
+                  <IoHammer
+                    className="mr-[0.4rem]"
+                    size={'1.7rem'}
+                    color="#000"
+                  />
+                  <a className="font-medium text-[1.4rem]">Minter</a>
+                </div>
+              </Link>
+              <Link href="#second-wave">
+                <div className="flex flex-row items-center hover:scale-105 duration-300">
+                  <FaSearch
+                    className="mr-[0.4rem]"
+                    size={'1.5rem'}
+                    color="#000"
+                  />
+                  <a className="font-medium text-[1.4rem]">Explorer</a>
+                </div>
+              </Link>
             </div>
           )}
         </span>

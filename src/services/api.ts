@@ -1,5 +1,5 @@
 const apiKey = 'kj2yeZHzg6XIYDGvqXS1mcjyt3DAikLF';
-const baseUrl = `https://eth-mainnet.alchemyapi.io/v2/${apiKey}`;
+const baseUrl = `https://eth-ropsten.alchemyapi.io/v2/${apiKey}`;
 
 async function getAddressNFTs(
   owner: string,
@@ -7,6 +7,7 @@ async function getAddressNFTs(
   retryAttempt: number = 0
 ) {
   if (retryAttempt === 5) {
+    console.log('');
     return;
   }
   if (owner) {
@@ -36,7 +37,7 @@ const getNFTsMetadata = async NFTS => {
       const metadata = await fetch(
         `${baseUrl}/getNFTMetadata?contractAddress=${NFT.contract.address}&tokenId=${NFT.id.tokenId}`
       ).then(data => data.json());
-      console.log(metadata);
+
       let imageUrl;
       if (metadata?.media[0].gateway.length) {
         imageUrl = metadata.media[0].gateway;
@@ -59,7 +60,7 @@ const getNFTsMetadata = async NFTS => {
 };
 
 const fetchNFTs = async (owner: string, contractAddress?: string) => {
-  const data = await getAddressNFTs(owner, contractAddress);
+  const data: any = await getAddressNFTs(owner, contractAddress);
 
   if (data.ownedNfts.length) {
     const NFTs = await getNFTsMetadata(data.ownedNfts);

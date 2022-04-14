@@ -1,5 +1,5 @@
-const apiKey = 'kj2yeZHzg6XIYDGvqXS1mcjyt3DAikLF';
-const baseUrl = `https://eth-ropsten.alchemyapi.io/v2/${apiKey}`;
+const apiKey = 'uVQGU_gYnoYkldNsnOWYE2fUwqBX0y4K';
+const baseUrl = `https://eth-mainnet.alchemyapi.io/v2/${apiKey}`;
 
 async function getAddressNFTs(
   owner: string,

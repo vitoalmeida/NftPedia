@@ -92,7 +92,7 @@ const Header: React.FC = () => {
                   <a className="font-medium text-[1.4rem]">Minter</a>
                 </div>
               </Link>
-              <Link href="#second-wave">
+              <Link href="/#second-wave">
                 <div className="flex flex-row items-center hover:scale-105 duration-300">
                   <FaSearch
                     className="mr-[0.4rem]"

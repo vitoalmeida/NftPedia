@@ -42,7 +42,7 @@ const Home: React.FC = () => {
   return (
     <div>
       <Head>
-        <title>NextPedia</title>
+        <title>NFTsPedia</title>
         <meta charSet="UTF-8" />
         <meta
           name="description"

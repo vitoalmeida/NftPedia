@@ -13,16 +13,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Formik } from 'formik';
 // Types
 import { nftMetadata, MinterValuesError } from '../@types/general';
+import Head from 'next/head';
 
 const Minter: React.FC = () => {
   //State variables
   const [walletAddress, setWallet] = useState('');
   const [status, setStatus] = useState('');
-  const [messageToast, setToastMessage] = useState('');
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [url, setURL] = useState('');
-
+  
   // Initial form values
   const initialValues: nftMetadata = {
     url: undefined,
@@ -78,7 +75,7 @@ const Minter: React.FC = () => {
 
     showToastNotification(walletResponse.status);
   };
-
+  
   // Function to listen changes on users wallet
   function addWalletListener() {
     if (window.ethereum) {
@@ -95,23 +92,34 @@ const Minter: React.FC = () => {
       setStatus('not_installed');
     }
   }
-
+  
   const handleMint = async (values: nftMetadata) => {
-    console.log(values);
     const { status } = await mintNFT(
       values.url,
       values.name,
       values.description
-    );
-    setStatus(status);
-  };
-
+      );
+      setStatus(status);
+    };
+    
   return (
     <main className="flex flex-1 h-screen bg-dark-green">
+      <Head>
+        <title>Minter - NFTsPedia</title>
+        <meta charSet="UTF-8" />
+        <meta
+          name="description"
+          content="Mint your's nfts"
+        />
+        <meta name="keywords" content="Mint, Nft" />
+        <meta name="author" content="Vitor Machado" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+      
       <Header />
 
       <div className="flex flex-col w-full my-36 px-14 py-10 mx-20 bg-white rounded-[2rem]">
-        {walletAddress.length > 0 ? (
+        {walletAddress.length ? (
           <>
             <h1 id="title" className="text-[2.4rem] font-semibold">
               Minter

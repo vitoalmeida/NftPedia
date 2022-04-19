@@ -38,23 +38,22 @@ const RectangleNFTCard: React.FC<Props> = ({ NFT }) => {
             >
               <IoClose size="2rem" color="#FFF" />
             </div>
-            {/* <div className="w-[35rem] xl:w-[45rem] duration-500"> */}
-              <Image
-                alt={`${NFT.image}-image`}
-                src={
-                  isImageError
-                    ? '/not-found.png'
-                    : `https://res.cloudinary.com/demo/image/fetch/${NFT.image}` ||
-                      ''
-                }
-                className="rounded-[1.5rem] duration-500"
-                onError={() => setImageError(true)}
-                width="1230"
-                quality="100"
-                height="1230"
-                layout={'responsive'}
-              />
-            {/* </div> */}
+
+            <Image
+              alt={`${NFT.image}-image`}
+              src={
+                isImageError
+                  ? '/not-found.png'
+                  : `https://res.cloudinary.com/demo/image/fetch/${NFT.image}` ||
+                    ''
+              }
+              className="rounded-[1.5rem] duration-500"
+              onError={() => setImageError(true)}
+              width="1230"
+              quality="100"
+              height="1230"
+              layout={'responsive'}
+            />
           </div>
 
           <div className="my-5 mb-8 px-12 w-full">
@@ -67,9 +66,7 @@ const RectangleNFTCard: React.FC<Props> = ({ NFT }) => {
                 {NFT.city}
               </p> */}
               <IoStar size="2rem" color="#F2D32F" />
-              <p className="text-lg ml-2 font-bold text-dark-grey">
-                3
-              </p>
+              <p className="text-lg ml-2 font-bold text-dark-grey">3</p>
             </div>
             <span className="flex my-4 h-[0.4rem] w-full bg-light-grey rounded-full" />
 

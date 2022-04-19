@@ -84,18 +84,19 @@ const SearchNFTs: React.FC<Props> = ({ NFTsList }) => {
         ) : null}
         <div className="mt-10 w-[20rem] md:w-[40rem] lg:w-[50rem] xl:w-[60rem] duration-500 mb-[-2rem]">
           <h1 className="font-extrabold text-[1.7rem] md:text-[2rem] xl:text-[2.5rem] text-black duration-500">
-            Resultados para
+            Carteira:
             {/* {goingTo ? (
               <>
-                <span className="text-dark-black">: {` `}</span>
-                <span className="text-dark-green">'{goingTo}'</span>
+              <span className="text-dark-black">: {` `}</span>
+              <span className="text-dark-green">'{goingTo}'</span>
               </>
-            ) : (
-              <span>{` `} sua busca</span>
-            )} */}
+              ) : (
+                <span>{` `} sua busca</span>
+              )} */}
           </h1>
+          <span className="text-xl font-medium">{walletAddress}</span>
         </div>
-        <div id="nft-list" className="flex min flex-row flex-wrap justify-between">
+        <div id="nft-list" className="flex flex-row flex-wrap justify-between">
           {NFTsList?.length > 0 ? (
             NFTsList.map((NFT, key) => {
               if (isMobile) {

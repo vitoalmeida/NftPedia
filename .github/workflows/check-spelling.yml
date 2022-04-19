@@ -28,4 +28,5 @@ jobs:
           contains(github.event.comment.body, '@check-spelling-bot apply')
         ) }}
       with:
+        extra_dictionaries: cspell:cpp/cpp.txt
         experimental_apply_changes_via_bot: 1

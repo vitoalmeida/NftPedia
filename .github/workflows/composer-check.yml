@@ -1,21 +1,16 @@
 name: Coverage check
 on: [pull_request]
 jobs:
-  coverage_check:
-    runs-on: ubuntu-lastest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm install --save-dev typescript @types/react @types/node
-      - run: npm run build
-      - run: npm run start &
-      - run: npm run cypress
-      - name: Coverage check
-        uses: OpenClassrooms/coverage-checker@v1.0.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          action: check
+  coverage_check :
+    runs-on : ubuntu-lastest 
+    steps :
+      - usa : actions/checkout@v2 
+      - name : instala dependências 
+        run : composer install --prefer-dist --no-progress --no-suggest 
+      - name : executa o conjunto de testes 
+        run : make test 
+      - name : Verificação de cobertura 
+        usa : OpenClassrooms /coverage-checker@v1.0.0 
+        com :
+           token : ${{ secrets.GITHUB_TOKEN }} 
+          ação : check

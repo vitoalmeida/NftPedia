@@ -5,10 +5,15 @@ jobs:
     runs-on: ubuntu-lastest
     steps:
       - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
-      - name: Run test suite
-        run: make test
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm install --save-dev typescript @types/react @types/node
+      - run: npm run build
+      - run: npm run start &
+      - run: npm run cypress
       - name: Coverage check
         uses: OpenClassrooms/coverage-checker@v1.0.0
         with:

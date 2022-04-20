@@ -1,5 +1,6 @@
 name: Coverage update
 on: [push]
+jobs:
   coverage_update:
     runs-on: ubuntu-lastest
     steps:

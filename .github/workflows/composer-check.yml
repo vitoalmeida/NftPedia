@@ -1,16 +1,16 @@
 name: Coverage check
 on: [pull_request]
 jobs:
-  coverage_check :
-    runs-on : ubuntu-lastest 
-    steps :
-      - usa : actions/checkout@v2 
-      - name : instala dependências 
-        run : composer install --prefer-dist --no-progress --no-suggest 
-      - name : executa o conjunto de testes 
-        run : make test 
-      - name : Verificação de cobertura 
-        usa : OpenClassrooms /coverage-checker@v1.0.0 
-        com :
-           token : ${{ secrets.GITHUB_TOKEN }} 
-          ação : check
+  coverage_check:
+    runs-on: ubuntu-lastest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Run test suite
+        run: make test
+      - name: Coverage check
+        uses: OpenClassrooms/coverage-checker@v1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          action: check

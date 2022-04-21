@@ -1,6 +1,6 @@
 name: Running Code Coverage
 
-on: [push, pull_request]
+on: [ pull_request]
 
 jobs:
   build:
@@ -45,7 +45,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         path: coverage/coverage-summary.json
-        title: Test Coverage
+        title: Test_Coverage
 
     - name: Print the output summary
       run: echo "Report coverage json ${{ steps.report.outputs.summary }}"

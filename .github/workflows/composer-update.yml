@@ -36,6 +36,8 @@ jobs:
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
 
-      post-steps:
-      - store_artifacts:
-          path: coverage/lcov-report
+    - name: Archive code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage-report
+          path: coverage/lcov-report/index.html

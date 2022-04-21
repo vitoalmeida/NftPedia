@@ -96,7 +96,7 @@ const SearchNFTs: React.FC<Props> = ({ NFTsList }) => {
           </h1>
           <span className="text-xl font-medium">{walletAddress}</span>
         </div>
-        <div id="nft-list" className="flex flex-row flex-wrap justify-between">
+        <div data-cy="nft-list" className="flex flex-row flex-wrap justify-between">
           {NFTsList?.length > 0 ? (
             NFTsList.map((NFT, key) => {
               if (isMobile) {

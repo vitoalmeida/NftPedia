@@ -10,6 +10,6 @@ context('Home Page', () => {
   });
 
   it('should select second nft', () => {
-    cy.get('#nft-list > :nth-child(2)').first().click();
+    cy.get('[data-cy=nft-list] > :nth-child(2)').first().click();
   });
 });

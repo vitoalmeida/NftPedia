@@ -52,5 +52,5 @@ jobs:
     - name: Coverage report 
       uses: romeovs/lcov-reporter-action@v0.2.16
       with:
-        github-token: ${{ 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 }}
+        github-token: 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
         lcov-file: ./coverage/lcov.info

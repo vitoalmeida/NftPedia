@@ -22,4 +22,5 @@ jobs:
     - run: yarn add -D typescript @types/react @types/node start-server-and-test 
     - run: yarn tsc
     - run: yarn build
+    - run: yarn start &
     - run: yarn cypress open

@@ -1,5 +1,8 @@
 name: Coverage check
-on: [pull_request]
+on: 
+  push:
+    branches:
+      [main]
 jobs:
   coverage_check:
     runs-on: ubuntu-lastest

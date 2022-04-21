@@ -1,5 +1,9 @@
 name: Coverage update
-on: [push]
+on: 
+  push:
+    branches:
+      [main]
+      
 jobs:
   coverage_update:
     runs-on: ubuntu-lastest

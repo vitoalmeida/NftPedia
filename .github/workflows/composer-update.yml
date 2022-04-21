@@ -31,7 +31,7 @@ jobs:
     - run: npm install --save-dev typescript @types/react @types/node
     - run: npm run build
     - run: npm run start &
-    - run: npm run cypress
+    - run: npm run cypress --headed
 
     # - name: Archive code coverage results
     #   uses: actions/upload-artifact@v2
@@ -53,3 +53,4 @@ jobs:
       uses: romeovs/lcov-reporter-action@v0.2.16
       with:
         lcov-file: ./coverage/lcov.info
+        github-token: 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

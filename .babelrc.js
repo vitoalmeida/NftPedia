@@ -3,7 +3,7 @@ console.log('shouldInstrumentCode', shouldInstrumentCode)
 
 module.exports = {
   "presets": ["next/babel"],
-  "plugins": shouldInstrumentCode ? ["istanbul"] : []
+  "plugins": ["istanbul"]
 }
 
 console.dir(module.exports, {depth: null})

@@ -1,18 +1,32 @@
-name: Coverage update
-on: [push]
-      
+name: Running Code Coverage
+
+on: [push, pull_request]
+
 jobs:
-  coverage_update:
-    runs-on: ubuntu-lastest
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: yarn add composer
-        run: composer install --prefer-dist --no-progress --no-suggest
-      - name: Run test suite
-        run: yarn test
-      - name: Coverage update
-        uses: OpenClassrooms/coverage-checker@v1.0.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          action: update
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
+
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: yarn 
+
+    - name: Run tests
+      run: yarn test
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1

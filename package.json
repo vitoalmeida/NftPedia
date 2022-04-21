@@ -7,10 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "cypress:start:app": "cross-env react-scripts -r @cypress/instrument-cra start",
-    "cypress:start:wait": "start-server-and-test cypress:start:app http://localhost:3000",
-    "cypress:open": "npm run cypress:start:wait -- \"cypress open\"",
-    "cypress:run": "npm run cypress:start:wait -- \"cypress run\"",
     "cypress": "cypress open",
     "test": "start-server-and-test dev 3000 cypress"
   },

@@ -20,6 +20,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn
     - run: yarn add --save-dev typescript @types/react @types/node
-    - run: yarn build
+    - run: yarn dev
     - run: yarn start &
     - run: yarn test

@@ -19,7 +19,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn
-    - run: yarn add --dev typescript @types/react @types/node start-server-and-test 
+    - run: yarn add --dev typescript @types/react@18.0.4 @types/node start-server-and-test 
     - run: yarn tsc
     - run: yarn build
     - run: yarn start &

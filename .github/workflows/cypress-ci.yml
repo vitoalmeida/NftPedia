@@ -19,6 +19,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn
-    - run: yarn build
     - run: yarn add -D typescript @types/react @types/node start-server-and-test 
-    - run: yarn test
+    - run: yarn test build

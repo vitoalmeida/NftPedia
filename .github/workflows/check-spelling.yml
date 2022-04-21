@@ -1,7 +1,10 @@
 name: Spell checking
 on:
-  pull_request_target:
+  # Triggers the workflow on push or pull request events but only for the main branch
   push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
   issue_comment:
     types: [created]
 
@@ -28,4 +31,11 @@ jobs:
           contains(github.event.comment.body, '@check-spelling-bot apply')
         ) }}
       with:
+        # Extra dictionaries to verify words 
+        extra_dictionaries: 
+          cspell:cpp/cpp.txt
+          cspell:css/css.txt 
+          cspell:html/html.txt
         experimental_apply_changes_via_bot: 1
+        # Uncomment if wants check spell of file names
+        # check_file_names: 1

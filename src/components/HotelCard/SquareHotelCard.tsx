@@ -24,7 +24,7 @@ const SquareNFTCard: React.FC<Props> = ({ NFT }) => {
 
   return (
     <>
-      <ReactModal
+      {/* <ReactModal
         closeTimeoutMS={200}
         className="modal"
         overlayClassName="modal-overlay"
@@ -38,7 +38,7 @@ const SquareNFTCard: React.FC<Props> = ({ NFT }) => {
           >
             <IoClose size="2rem" color="#FFF" />
           </div>
-          {/* <Carousel emulateTouch autoPlay showStatus={false}>
+          <Carousel emulateTouch autoPlay showStatus={false}>
             {NFT.images.map((image, index) => {
               return (
                 <div key={index} className="relative w-[21.1rem] h-[15rem]">
@@ -51,7 +51,7 @@ const SquareNFTCard: React.FC<Props> = ({ NFT }) => {
                 </div>
               );
             })}
-          </Carousel> */}
+          </Carousel>
         </div>
 
         <div className="my-5 mb-8 px-9 w-[21rem]">
@@ -59,14 +59,14 @@ const SquareNFTCard: React.FC<Props> = ({ NFT }) => {
             {NFT.title}
           </h1>
           <div className="flex mt-[0.2rem] items-center flex-row ml-[-0.2rem]">
-            {/* <IoLocationSharp size="1.5rem" color="#FF4A4A" />
+            <IoLocationSharp size="1.5rem" color="#FF4A4A" />
             <p className="text-lg ml-2 font-bold text-dark-grey mr-8">
               {NFT.city}
             </p>
             <IoStar size="1.5rem" color="#F2D32F" />
             <p className="text-lg ml-2 font-bold text-dark-grey">
               {NFT.stars}
-            </p> */}
+            </p>
           </div>
 
           <span className="flex my-4 h-[0.4rem] w-full bg-light-grey rounded-full" />
@@ -80,12 +80,12 @@ const SquareNFTCard: React.FC<Props> = ({ NFT }) => {
             </p>
           </div>
           <div className="flex w-full mt-5">
-            {/* <p className="ml-auto font-medium text-2xl text-dark-green h-auto break-words">
+            <p className="ml-auto font-medium text-2xl text-dark-green h-auto break-words">
               R$ {NFT.price}
-            </p> */}
+            </p>
           </div>
         </div>
-      </ReactModal>
+      </ReactModal> */}
 
       <div
         id="container"

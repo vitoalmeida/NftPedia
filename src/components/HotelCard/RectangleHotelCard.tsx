@@ -24,7 +24,7 @@ const RectangleNFTCard: React.FC<Props> = ({ NFT }) => {
 
   return (
     <>
-      <ReactModal
+      {/* <ReactModal
         className="modal"
         overlayClassName="modal-overlay"
         isOpen={isModalOpen}
@@ -61,10 +61,10 @@ const RectangleNFTCard: React.FC<Props> = ({ NFT }) => {
               {NFT.title}
             </h1>
             <div className="flex mt-[0.2rem] items-center flex-row ml-[-0.2rem]">
-              {/* <IoLocationSharp size="2rem" color="#FF4A4A" /> */}
-              {/* <p className="text-lg ml-2 font-bold text-dark-grey mr-8">
+               <IoLocationSharp size="2rem" color="#FF4A4A" /> 
+              <p className="text-lg ml-2 font-bold text-dark-grey mr-8">
                 {NFT.city}
-              </p> */}
+              </p>
               <IoStar size="2rem" color="#F2D32F" />
               <p className="text-lg ml-2 font-bold text-dark-grey">3</p>
             </div>
@@ -79,13 +79,13 @@ const RectangleNFTCard: React.FC<Props> = ({ NFT }) => {
               </p>
             </div>
             <div className="flex w-full mt-8">
-              {/* <p className="ml-auto font-medium text-2xl text-dark-green h-auto break-words">
+              <p className="ml-auto font-medium text-2xl text-dark-green h-auto break-words">
                 R$ {NFT.price}
-              </p> */}
+              </p>
             </div>
           </div>
         </div>
-      </ReactModal>
+      </ReactModal> */}
 
       <div
         id="container"

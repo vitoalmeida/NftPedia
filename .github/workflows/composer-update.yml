@@ -7,6 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
+        run: yarn add composer
         run: composer install --prefer-dist --no-progress --no-suggest
       - name: Run test suite
         run: yarn test

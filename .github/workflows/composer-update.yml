@@ -39,13 +39,17 @@ jobs:
     #     name: code-coverage-report
     #     path: coverage/lcov-report/index.html
     
-    - name: Coverage report
-      uses: eleboys/test-coverage-report-action@v1.0.2
-      id: report
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        path: coverage/coverage-summary.json
-        title: Test_Coverage
+    # - name: Coverage report
+    #   uses: eleboys/test-coverage-report-action@v1.0.2
+    #   id: report
+    #   with:
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    #     path: coverage/coverage-summary.json
+    #     title: Test_Coverage
 
-    - name: Print the output summary
-      run: echo "Report coverage json ${{ steps.report.outputs.summary }}"
+    # - name: Print the output summary
+    #   run: echo "Report coverage json ${{ steps.report.outputs.summary }}"
+    - name: Coverage report 
+      uses: romeovs/lcov-reporter-action@v0.2.16
+      with:
+        lcov-file: ./coverage/lcov.info

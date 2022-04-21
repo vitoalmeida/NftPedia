@@ -14,8 +14,6 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import RectangleHotelCard from '../components/HotelCard/RectangleHotelCard';
 import SquareHotelCard from '../components/HotelCard/SquareHotelCard';
-// Helpers
-import generalHelpers from '../helpers/filter';
 // Types
 import { NFT } from '../@types/general';
 

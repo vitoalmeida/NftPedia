@@ -3,7 +3,7 @@ import { pinJSONToIPFS } from './pinata';
 
 require('dotenv').config();
 const alchemyKey = "https://eth-ropsten.alchemyapi.io/v2/kj2yeZHzg6XIYDGvqXS1mcjyt3DAikLF";
-import { createAlchemyWeb3 } from '@alch/alchemy-web3';
+import { AlchemyWeb3, createAlchemyWeb3 } from '@alch/alchemy-web3';
 const web3 = alchemyKey ? createAlchemyWeb3(alchemyKey) : '';
 
 const contractABI = require('../contract-abi.json');
@@ -93,7 +93,7 @@ export const mintNFT = async (url, name, description) => {
   
   const tokenURI = pinataResponse.pinataUrl;
   
-  window.contract = await new web3.eth.Contract(contractABI, contractAddress);
+  window.contract = await new (web3 as AlchemyWeb3).eth.Contract(contractABI, contractAddress);
 
   // Set up Ethereum transaction
   const transactionParameters = {

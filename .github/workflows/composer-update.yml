@@ -23,15 +23,15 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm install --save-dev typescript @types/react @types/node
-    - run: npm run build
-    - run: npm run start &
-    - run: npm run cypress --headed
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v2
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
+    # - run: npm install
+    # - run: npm install --save-dev typescript @types/react @types/node
+    # - run: npm run build
+    # - run: npm run start &
+    # - run: npm run cypress --headed
 
     # - name: Archive code coverage results
     #   uses: actions/upload-artifact@v2
@@ -52,5 +52,5 @@ jobs:
     - name: Coverage report 
       uses: romeovs/lcov-reporter-action@v0.2.16
       with:
+        github-token: ${{ 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 }}
         lcov-file: ./coverage/lcov.info
-        github-token: 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

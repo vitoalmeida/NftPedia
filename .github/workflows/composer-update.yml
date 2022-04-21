@@ -49,8 +49,19 @@ jobs:
 
     # - name: Print the output summary
     #   run: echo "Report coverage json ${{ steps.report.outputs.summary }}"
-    - name: Coverage report 
-      uses: romeovs/lcov-reporter-action@v0.2.16
-      with:
-        github-token: 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
-        lcov-file: ./coverage/lcov.info
+    # - name: Coverage report 
+    #   uses: romeovs/lcov-reporter-action@v0.2.16
+    #   with:
+    #     github-token: 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
+    #     lcov-file: ./coverage/lcov.info
+  coverage:
+      permissions:
+        checks: write
+        pull-requests: write
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v1
+        - uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          coverage-file: ./coverage/report.json
+          base-coverage-file: ./coverage/master/report.json

@@ -33,15 +33,19 @@ jobs:
     - run: npm run start &
     - run: npm run cypress --headed
 
-    - name: Coverage report
-      uses: eleboys/test-coverage-report-action@v1.0.2
-      id: report
+    - name: Simplecov Report
+      uses: pi-chan/simplecov-report-group-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        path: coverage/coverage-summary.json
-        title: Test_Coverage
-    - name: Print the output summary
-      run: echo "Report coverage json ${{ steps.report.outputs.summary }}"
+    # - name: Coverage report
+    #   uses: eleboys/test-coverage-report-action@v1.0.2
+    #   id: report
+    #   with:
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    #     path: coverage/coverage-summary.json
+    #     title: Test_Coverage
+    # - name: Print the output summary
+    #   run: echo "Report coverage json ${{ steps.report.outputs.summary }}"
 
 
     # - name: Archive code coverage results

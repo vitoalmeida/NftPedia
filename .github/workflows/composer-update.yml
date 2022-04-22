@@ -33,11 +33,18 @@ jobs:
     - run: npm run start &
     - run: npm run cypress --headed
 
-    - name: Simplecov Report
-      uses: pi-chan/simplecov-report-group-action@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        resultPath: coverage/coverage-final.json
+    uses: themichaelhall/check-code-coverage@v1
+    with:
+      report: coverage/clover.xml
+      required-percentage: 80
+
+    # - name: Simplecov Report
+    #   uses: pi-chan/simplecov-report-group-action@v1
+    #   with:
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    #     resultPath: coverage/coverage-final.json
+    
+
     # - name: Coverage report
     #   uses: eleboys/test-coverage-report-action@v1.0.2
     #   id: report

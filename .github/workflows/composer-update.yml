@@ -27,24 +27,31 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm install --save-dev typescript @types/react @types/node
-    - run: npm run build
-    - run: npm run start &
-    - run: npm run cypress --headed
+    # - run: npm install
+    # - run: npm install --save-dev typescript @types/react @types/node
+    # - run: npm run build
+    # - run: npm run start &
+    # - run: npm run cypress --headed
 
-    - name: Report
-      uses: themichaelhall/check-code-coverage@v1
-      with:
-        report: coverage/clover.xml
-        required-percentage: 20
-
-    # - name: Simplecov Report
-    #   uses: pi-chan/simplecov-report-group-action@v1
+    # - name: Report
+    #   uses: themichaelhall/check-code-coverage@v1
     #   with:
-    #     token: ${{ secrets.GITHUB_TOKEN }}
-    #     resultPath: coverage/coverage-final.json
-    
+    #     report: coverage/clover.xml
+    #     required-percentage: 20
+
+    # - name: Show code coverage results
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: code-coverage-report
+    # path: coverage/lcov-report/index.html
+
+    - name: Comment PR
+      uses: thollander/actions-comment-pull-request@v1
+
+      with:
+        message: 'Example of message !'
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      path: coverage/lcov-report/index.html
 
     # - name: Coverage report
     #   uses: eleboys/test-coverage-report-action@v1.0.2

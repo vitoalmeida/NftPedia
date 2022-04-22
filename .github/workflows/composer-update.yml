@@ -40,8 +40,8 @@ jobs:
           threshold_alert: 35
           threshold_warning: 50
           threshold_metric: "lines"
-
-        uses: themichaelhall/check-code-coverage@v1
+          
+      - uses: themichaelhall/check-code-coverage@v1
         with:
           report: coverage/clover.xml
           required-percentage: 75

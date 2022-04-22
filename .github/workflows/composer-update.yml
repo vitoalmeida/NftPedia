@@ -41,7 +41,7 @@ jobs:
         path: coverage/coverage-summary.json
         title: Test_Coverage
     - name: Print the output summary
-    - run: echo "Report coverage json ${{ steps.report.outputs.summary }}"
+      run: echo "Report coverage json ${{ steps.report.outputs.summary }}"
 
 
     # - name: Archive code coverage results

@@ -37,7 +37,7 @@ jobs:
       uses: pi-chan/simplecov-report-group-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        resultPath: coverage/coverage-summary.json
+        resultPath: coverage/coverage-final.json
     # - name: Coverage report
     #   uses: eleboys/test-coverage-report-action@v1.0.2
     #   id: report

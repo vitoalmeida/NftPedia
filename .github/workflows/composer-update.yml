@@ -11,13 +11,15 @@ jobs:
       matrix:
         node-version: [16.x]
 
-    steps:
-      - name: Monitor coverage
-        if: ! contains(github.event.pull_request.user.login, 'dependabot[bot]')
+    - name: Monitor coverage
         uses: slavcodev/coverage-monitor-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           coverage_path: "coverage/clover.xml"
+          threshold_alert: 10
+          threshold_warning: 50
+          threshold_metric: "lines"
+          
 
       # - name: Checkout repository
       #   uses: actions/checkout@v2

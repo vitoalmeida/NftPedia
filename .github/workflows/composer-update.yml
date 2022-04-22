@@ -1,0 +1,86 @@
+name: Running Code Coverage
+
+on: [ pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Run tests
+      - run: npm install
+      - run: npm install --save-dev typescript @types/react @types/node
+      - run: npm run build
+      - run: npm run start &
+      - run: npm run cypress --headed
+
+      # Generate coverage report
+      - name: Coverage report
+        uses: slavcodev/coverage-monitor-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          coverage_path: "coverage/clover.xml"
+          threshold_alert: 35
+          threshold_warning: 50
+          threshold_metric: "lines"
+          comment_footer: false
+
+      # Checks if the coverage has reached the minimum limit  
+      - uses: themichaelhall/check-code-coverage@v1
+        with:
+          report: coverage/clover.xml
+          required-percentage: 75
+
+      # - name: Show code coverage results
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: code-coverage-report
+      # path: coverage/lcov-report/index.html
+
+      # - name: Checkout
+      #   uses: actions/checkout@v3
+
+      # - name: Comment PR
+      #   uses: thollander/actions-comment-pull-request@v1
+
+      #   with:
+      #     message: 'Example of message !' }}
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN
+      #     path: coverage/coverage-summary.json
+
+    # - name: Coverage report
+    #   uses: eleboys/test-coverage-report-action@v1.0.2
+    #   id: report
+    #   with:
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    #     path: coverage/coverage-summary.json
+    #     title: Test_Coverage
+    # - name: Print the output summary
+    #   run: echo "Report coverage json ${{ steps.report.outputs.summary }}"
+
+
+    # - name: Archive code coverage results
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: code-coverage-report
+    #     path: coverage/lcov-report/index.html

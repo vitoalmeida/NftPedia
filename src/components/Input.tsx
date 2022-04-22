@@ -61,6 +61,7 @@ const Input: React.FC<Props> = ({
         </div>
         <span className="absolute my-[0.7rem] ml-[2.7rem] h-5 w-[0.12rem] rounded-full bg-[#EAEAEA]" />
         <input
+          id={name + 'Input'}
           className="input"
           type={type}
           name={name}

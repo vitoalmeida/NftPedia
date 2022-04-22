@@ -33,6 +33,7 @@ jobs:
     - run: npm run start &
     - run: npm run cypress --headed
 
+    - name: Report
     uses: themichaelhall/check-code-coverage@v1
     with:
       report: coverage/clover.xml

@@ -54,6 +54,7 @@ jobs:
         with:
           message: 'Example of message !'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: coverage/coverage-summary.json
 
     # - name: Coverage report
     #   uses: eleboys/test-coverage-report-action@v1.0.2

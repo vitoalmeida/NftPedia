@@ -46,7 +46,7 @@ jobs:
       # path: coverage/lcov-report/index.html
 
       - name: Checkout
-          uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@v1
